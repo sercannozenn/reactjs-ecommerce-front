@@ -38,6 +38,18 @@ a {
 .fw-bold-600 {
     font-weight: 600;
 }
+.fw-bold-500 {
+    font-weight: 500;
+}
+.fw-bold-400 {
+    font-weight: 400;
+}
+.fw-bold-300 {
+    font-weight: 300;
+}
+.fw-bold-100 {
+    font-weight: 100;
+}
 /**
    TOPBAR
 */
@@ -171,3 +183,145 @@ header nav li a.nav-link:before {
     border-bottom: 2px solid #ffe115;
     box-shadow: unset;
 }
+/**
+Main Slider
+ */
+.slider .slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+    width: 100%;
+}
+.slider .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.slider-title {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 100%;
+    text-align: center;
+}
+.title-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.slider-title h3 {
+    font-size: 55px;
+}
+.slider-title h2 {
+    font-size: 75px;
+    text-align: center;
+}
+.slider-title a {
+    border-radius: 0;
+    font-size: 20px;
+    padding: 10px 30px;
+}
+.slider .swiper-button-prev,
+.slider .swiper-button-next {
+    width: 100px;
+    height: 100px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    transition: background-color .4s ease;
+}
+.slider .swiper-button-prev:hover,
+.slider .swiper-button-next:hover {
+    background-color: #fff;
+    color: #000;
+}
+/*
+Image Slider Latest Added Product
+ */
+.wrapper-product .product-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+.wrapper-product .product-tag {
+    position: absolute;
+    left: 10px;
+    top: 5px;
+    font-size: 10px;
+    letter-spacing: 0.04em;
+}
+.wrapper-product .favorite,
+.wrapper-product .un-favorite {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+}
+.wrapper-product .product-brand {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: 12px;
+    padding-inline-start: 5px;
+    padding-inline-end: 5px;
+    padding-bottom: 2px;
+    letter-spacing: 1px;
+    background-color: rgb(245 151 60 / 21%);;
+}
+.wrapper-product .product-info .product-title {
+    font-size: 19px;
+    margin-bottom: 0;
+}
+.wrapper-product .product-info .product-description {
+    font-size: 14px;
+}
+.wrapper-product .product-info .product-price {
+    font-weight: 500;
+    font-size: 14px;
+}
+.latest-added-products {
+    background-color: rgb(245 151 60 / 21%);
+}
+.latest-added-swiper {
+    overflow-x: hidden;
+}
+
+
+.latest-added-products .swiper-button-next:after,
+.latest-added-products .swiper-button-prev:after {
+    font-size: 15px;
+    color: #2d3a4b;
+}
+.latest-added-products .swiper-button-prev {
+    right: 60px;
+    left: auto;
+}
+
+.latest-added-products .swiper-button-next,
+.latest-added-products .swiper-button-prev {
+    top: 14px;
+    bottom: auto;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+}
+
+.latest-added-products .swiper-button-next:hover,
+.latest-added-products .swiper-button-prev:hover {
+    border-radius: 40px;
+    border: 1px solid #2d3a4b;
+}
+
+.latest-added-products .swiper-button-next,
+.latest-added-products .swiper-button-prev {
+    top: 14px;
+    bottom: auto;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+}
+
