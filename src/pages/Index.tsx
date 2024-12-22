@@ -1,4 +1,4 @@
-import {useRef} from "react";
+import {useRef, useState} from "react";
 
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {Navigation} from 'swiper/modules';
@@ -11,12 +11,53 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 // @ts-ignore
 import "swiper/css/scrollbar";
+
+import {VerticalTimeline, VerticalTimelineElement} from 'react-vertical-timeline-component';
+import 'react-vertical-timeline-component/style.min.css';
+import {FaBriefcase, FaGraduationCap, FaRocket} from "react-icons/fa";
+
 import urun from '../assets/images/urun1.webp';
 import slider from '../assets/images/slider.jpg';
 
 function Index() {
     const prevRef = useRef(null);
     const nextRef = useRef(null);
+
+    const timelineData = [
+        {
+            id: 1,
+            date: "2024-01-01",
+            title: "Başlangıç",
+            description: "Bu bizim başlangıcımız.",
+            icon: <FaRocket/>, // Dinamik ikon
+            iconStyle: {background: "rgb(33, 150, 243)", color: "#fff"}, // İkon stili
+        },
+        {
+            id: 2,
+            date: "2024-02-01",
+            title: "İlerleme",
+            description: "Proje ilerliyor.",
+            icon: <FaBriefcase/>, // Dinamik ikon
+            iconStyle: {background: "rgb(16, 204, 82)", color: "#fff"}, // İkon stili
+        },
+        {
+            id: 3,
+            date: "2024-03-01",
+            title: "Tamamlanma",
+            description: "Proje tamamlandı.",
+            icon: <FaGraduationCap/>, // Dinamik ikon
+            iconStyle: {background: "rgb(233, 30, 99)", color: "#fff"}, // İkon stili
+        },
+    ];
+    const [visibleCount, setVisibleCount] = useState(2); // Başlangıçta 3 öğe göster
+
+    // Gösterilecek öğeleri hesapla
+    const visibleData = timelineData.slice(0, visibleCount);
+
+    // "Load More" butonuna tıklandığında öğe sayısını artır
+    const loadMore = () => {
+        setVisibleCount((prevCount) => prevCount + 2); // 2 adet daha ekle
+    };
     return (
         <>
             <section className="slider position-relative bg-orange mt-2">
@@ -267,6 +308,32 @@ function Index() {
 
                     </div>
                 </section>
+                <section>
+                    <VerticalTimeline>
+                        {visibleData.map((item) => (
+                            <VerticalTimelineElement
+                                className="vertical-timeline-element--work"
+                                contentStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+                                contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
+                                key={item.id}
+                                date={item.date}
+                                dateClassName="text-dark"
+                                icon={item.icon}
+                                iconStyle={item.iconStyle}
+                            >
+                                <h3>{item.title}</h3>
+                                <p>{item.description}</p>
+                            </VerticalTimelineElement>
+                        ))}
+                    </VerticalTimeline>
+
+                    {visibleCount < timelineData.length && (
+                        <div style={{ textAlign: "center", marginTop: "20px" }}>
+                            <button onClick={loadMore} style={{ padding: "10px 20px", fontSize: "16px" }}>
+                                Daha Fazla Yükle
+                            </button>
+                        </div>
+                    )}                </section>
             </div>
 
         </>
