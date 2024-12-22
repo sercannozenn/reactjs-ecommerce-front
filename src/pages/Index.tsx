@@ -308,7 +308,7 @@ function Index() {
 
                     </div>
                 </section>
-                <section>
+                <section className="container">
                     <VerticalTimeline>
                         {visibleData.map((item) => (
                             <VerticalTimelineElement
