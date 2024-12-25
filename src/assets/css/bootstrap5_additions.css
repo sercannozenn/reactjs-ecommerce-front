@@ -1,0 +1,121 @@
+/* Small (sm) cihazlar için */
+/* Genel Border */
+.border-sm-0 {
+    border: none !important;
+}
+.border-sm-1 {
+    border: var(--bs-border-width, 1px) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important;
+}
+.border-sm-2 {
+    border: calc(var(--bs-border-width, 1px) * 2) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important;
+}
+.border-sm-3 {
+    border: calc(var(--bs-border-width, 1px) * 3) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important;
+}
+.border-sm-4 {
+    border: calc(var(--bs-border-width, 1px) * 4) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important;
+}
+.border-sm-5 {
+    border: calc(var(--bs-border-width, 1px) * 5) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important;
+}
+/* Top Border */
+.border-sm-top-0 { border-top: none !important; }
+.border-sm-top-1 { border-top: var(--bs-border-width, 1px) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+.border-sm-top-2 { border-top: calc(var(--bs-border-width, 1px) * 2) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+.border-sm-top-3 { border-top: calc(var(--bs-border-width, 1px) * 3) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+.border-sm-top-4 { border-top: calc(var(--bs-border-width, 1px) * 4) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+.border-sm-top-5 { border-top: calc(var(--bs-border-width, 1px) * 5) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+
+/* End Border */
+.border-sm-end-0 { border-right: none !important; }
+.border-sm-end-1 { border-right: var(--bs-border-width, 1px) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+.border-sm-end-2 { border-right: calc(var(--bs-border-width, 1px) * 2) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+.border-sm-end-3 { border-right: calc(var(--bs-border-width, 1px) * 3) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+.border-sm-end-4 { border-right: calc(var(--bs-border-width, 1px) * 4) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+.border-sm-end-5 { border-right: calc(var(--bs-border-width, 1px) * 5) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+
+/* Bottom Border */
+.border-sm-bottom-0 { border-bottom: none !important; }
+.border-sm-bottom-1 { border-bottom: var(--bs-border-width, 1px) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+.border-sm-bottom-2 { border-bottom: calc(var(--bs-border-width, 1px) * 2) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+.border-sm-bottom-3 { border-bottom: calc(var(--bs-border-width, 1px) * 3) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+.border-sm-bottom-4 { border-bottom: calc(var(--bs-border-width, 1px) * 4) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+.border-sm-bottom-5 { border-bottom: calc(var(--bs-border-width, 1px) * 5) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+
+/* Start Border */
+.border-sm-start-0 { border-left: none !important; }
+.border-sm-start-1 { border-left: var(--bs-border-width, 1px) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+.border-sm-start-2 { border-left: calc(var(--bs-border-width, 1px) * 2) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+.border-sm-start-3 { border-left: calc(var(--bs-border-width, 1px) * 3) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+.border-sm-start-4 { border-left: calc(var(--bs-border-width, 1px) * 4) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+.border-sm-start-5 { border-left: calc(var(--bs-border-width, 1px) * 5) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+
+/* Medium (md) cihazlar için */
+@media (min-width: 768px) {
+    /* Top Border */
+    .border-md-top-0 { border-top: none !important; }
+    .border-md-top-1 { border-top: var(--bs-border-width, 1px) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-md-top-2 { border-top: calc(var(--bs-border-width, 1px) * 2) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-md-top-3 { border-top: calc(var(--bs-border-width, 1px) * 3) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-md-top-4 { border-top: calc(var(--bs-border-width, 1px) * 4) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-md-top-5 { border-top: calc(var(--bs-border-width, 1px) * 5) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+
+    /* End Border */
+    .border-md-end-0 { border-right: none !important; }
+    .border-md-end-1 { border-right: var(--bs-border-width, 1px) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-md-end-2 { border-right: calc(var(--bs-border-width, 1px) * 2) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-md-end-3 { border-right: calc(var(--bs-border-width, 1px) * 3) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-md-end-4 { border-right: calc(var(--bs-border-width, 1px) * 4) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-md-end-5 { border-right: calc(var(--bs-border-width, 1px) * 5) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+
+    /* Bottom Border */
+    .border-md-bottom-0 { border-bottom: none !important; }
+    .border-md-bottom-1 { border-bottom: var(--bs-border-width, 1px) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-md-bottom-2 { border-bottom: calc(var(--bs-border-width, 1px) * 2) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-md-bottom-3 { border-bottom: calc(var(--bs-border-width, 1px) * 3) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-md-bottom-4 { border-bottom: calc(var(--bs-border-width, 1px) * 4) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-md-bottom-5 { border-bottom: calc(var(--bs-border-width, 1px) * 5) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+
+    /* Start Border */
+    .border-md-start-0 { border-left: none !important; }
+    .border-md-start-1 { border-left: var(--bs-border-width, 1px) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-md-start-2 { border-left: calc(var(--bs-border-width, 1px) * 2) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-md-start-3 { border-left: calc(var(--bs-border-width, 1px) * 3) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-md-start-4 { border-left: calc(var(--bs-border-width, 1px) * 4) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-md-start-5 { border-left: calc(var(--bs-border-width, 1px) * 5) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+}
+
+/* Large (lg) cihazlar için */
+@media (min-width: 992px) {
+    /* Top Border */
+    .border-lg-top-0 { border-top: none !important; }
+    .border-lg-top-1 { border-top: var(--bs-border-width, 1px) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-lg-top-2 { border-top: calc(var(--bs-border-width, 1px) * 2) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-lg-top-3 { border-top: calc(var(--bs-border-width, 1px) * 3) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-lg-top-4 { border-top: calc(var(--bs-border-width, 1px) * 4) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-lg-top-5 { border-top: calc(var(--bs-border-width, 1px) * 5) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+
+    /* End Border */
+    .border-lg-end-0 { border-right: none !important; }
+    .border-lg-end-1 { border-right: var(--bs-border-width, 1px) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-lg-end-2 { border-right: calc(var(--bs-border-width, 1px) * 2) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-lg-end-3 { border-right: calc(var(--bs-border-width, 1px) * 3) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-lg-end-4 { border-right: calc(var(--bs-border-width, 1px) * 4) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-lg-end-5 { border-right: calc(var(--bs-border-width, 1px) * 5) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+
+    /* Bottom Border */
+    .border-lg-bottom-0 { border-bottom: none !important; }
+    .border-lg-bottom-1 { border-bottom: var(--bs-border-width, 1px) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-lg-bottom-2 { border-bottom: calc(var(--bs-border-width, 1px) * 2) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-lg-bottom-3 { border-bottom: calc(var(--bs-border-width, 1px) * 3) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-lg-bottom-4 { border-bottom: calc(var(--bs-border-width, 1px) * 4) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-lg-bottom-5 { border-bottom: calc(var(--bs-border-width, 1px) * 5) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+
+    /* Start Border */
+    .border-lg-start-0 { border-left: none !important; }
+    .border-lg-start-1 { border-left: var(--bs-border-width, 1px) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-lg-start-2 { border-left: calc(var(--bs-border-width, 1px) * 2) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-lg-start-3 { border-left: calc(var(--bs-border-width, 1px) * 3) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-lg-start-4 { border-left: calc(var(--bs-border-width, 1px) * 4) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+    .border-lg-start-5 { border-left: calc(var(--bs-border-width, 1px) * 5) var(--bs-border-style, solid) var(--bs-border-color, currentColor) !important; }
+}

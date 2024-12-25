@@ -5,6 +5,7 @@
 body {
     margin: 0 auto;
     font-family: "Montserrat", sans-serif;
+    background-color: #f6f3f200;
 }
 a {
     text-decoration: none;
@@ -22,6 +23,9 @@ a {
 .text-orange {
     color: #f38509;
 }
+.text-orange-bold {
+    color: #f96f09;
+}
 
 .text-yellow {
     color: #ffe115;
@@ -30,9 +34,26 @@ a {
 .bg-orange {
     background-color: #f38509;
 }
-
+.bg-orange-soft{
+    background: rgb(255 188 0) !important;
+}
+.bg-orange-bold{
+    background: #f96f09 !important;
+}
 .bg-yellow {
-    background-color: #ffe115;
+    background-color: #ffe115 !important;
+}
+.bg-pink {
+    background-color: #a931923d !important;
+}
+.bg-blue{
+    background-color: #EAF6FF;
+}
+.bg-yellow-f{
+    background-color: #FFF9E6;
+}
+.bg-brown{
+    background-color: rgb(245 151 60 / 21%);
 }
 .fontSize10{
     font-size: 10px !important;
@@ -67,6 +88,7 @@ a {
 .fw-bold-100 {
     font-weight: 100;
 }
+
 /**
    TOPBAR
 */
@@ -400,7 +422,7 @@ Image Slider Latest Added Product
 .custom-footer h5 {
     font-size: 18px;
     margin-bottom: 20px;
-    color: #f39c12; /* Başlıklar için turuncu renk */
+    color: #f38509; /* Başlıklar için turuncu renk */
 }
 
 .custom-footer p {
@@ -425,7 +447,8 @@ Image Slider Latest Added Product
 }
 
 .quick-links li a:hover {
-    color: #f39c12; /* Hover rengi */
+    /*color: #f39c12; !* Hover rengi *!*/
+    color: #f38509; /* Hover rengi */
 }
 
 /* Sosyal Medya İkonları */
@@ -447,4 +470,11 @@ Image Slider Latest Added Product
     font-size: 13px;
     border-top: 1px solid #7f8c8d;
     padding-top: 10px;
+}
+.vertical-timeline{
+    max-width: unset !important;
+}
+
+@media only screen and (max-width:768px) {
+
 }

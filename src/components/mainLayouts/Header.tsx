@@ -15,7 +15,7 @@ function Header() {
                                 <a href="javascript:void(0)" className="dropdown-toggle position-relative" role="button"
                                    data-bs-toggle="dropdown" aria-expanded="false">
                                     <i className="bi bi-cart zoom text-white fs-4"></i>
-                                    <span className="item-count bg-yellow text-black">13</span>
+                                    <span className="item-count bg-orange-bold text-black">13</span>
                                 </a>
                                 <div className="dropdown-menu">
                                     <div className="row overflow-custom">

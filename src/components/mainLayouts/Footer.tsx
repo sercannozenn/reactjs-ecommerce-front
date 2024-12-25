@@ -11,7 +11,7 @@ const Footer = () => {
                             Bu platform, çeşitli ürünlerin satışını desteklemek ve kermes etkinliklerimizi duyurmak için tasarlanmıştır. Tüm gelirler, hayır projelerine aktarılmaktadır.
                         </p>
                     </div>
-                    <div className="col-8 ms-auto">
+                    <div className="col-8 ms-lg-auto mt-3 mt-md-auto">
                         <div className="row">
                             <div className="col-md-4">
                                 <h5>Hızlı Erişim</h5>
