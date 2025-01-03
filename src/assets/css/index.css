@@ -475,6 +475,215 @@ Image Slider Latest Added Product
     max-width: unset !important;
 }
 
+
+/*main {*/
+/*    padding: 30px;*/
+/*}*/
+.product-filter {
+    max-height: calc(100vh - 240px);
+    overflow: hidden scroll;
+    position: sticky;
+    top: 0;
+}
+.product-filter .filter-item-wrapper {
+    position: relative;
+    border-bottom: 1px solid #ececec;
+    padding: 20px 0;
+}
+.product-filter .filter-title {
+    font-size: 14px;
+}
+.filter-detail {
+    max-height: 100px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.product-filter .search-text {
+    height: 30px;
+    font-size: 14px;
+}
+.product-filter .search-text.form-control:focus {
+    border-color: #f38509;
+    box-shadow: unset;
+}
+.filter-item label {
+    font-size: 13px;
+}
+.filter-price > * {
+    padding-left: 12px;
+    padding-right: 3px;
+}
+.filter-price input {
+    font-size: 11px;
+}
+.filter-price button {
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+.filter-item input[type=checkbox] {
+    min-width: 15px;
+    min-height: 15px;
+    border-radius: 2px;
+    position: relative;
+    cursor: pointer;
+    border: solid 1.5px #d6d6d6;
+}
+.filter-item input[type=checkbox]:checked {
+    background-color: #f38509;
+}
+.filter-item input[type=checkbox]:focus {
+    outline: none;
+    box-shadow: none;
+}
+.filter-price input:focus {
+    border-color: #f38509;
+    box-shadow: none;
+}
+.filter-price button:hover {
+    color: #f38509;
+}
+.product-list-info .product-count {
+    font-size: 12px;
+}
+.sortby {
+    border: unset;
+    padding-right: 5px;
+    font-size: 14px;
+}
+.product-detail h4 {
+    letter-spacing: 2px;
+}
+.price {
+    letter-spacing: 1px;
+}
+.product-detail hr {
+    border-top: 1px solid rgba(0, 0, 0, 0.6);
+}
+.product-detail h6 {
+    letter-spacing: 1px;
+}
+.product-detail .product-short-description {
+    line-height: 25px;
+    letter-spacing: 0.05em;
+}
+.shopping .bi-heart {
+    font-size: 30px;
+    line-height: 50px;
+    cursor: pointer;
+}
+.piece-wrapper .input-group {
+    border: 1px solid #f38509;
+    border-radius: 5px;
+}
+.piece-wrapper .input-group span {
+    height: 50px;
+    width: 33%;
+    text-align: center;
+    line-height: 50px;
+    position: relative;
+    font-size: 25px;
+    color: #f38509;
+    cursor: pointer;
+}
+.piece-wrapper .input-group span.piece-increase:before {
+    left: 0;
+    right: auto;
+}
+.piece-wrapper .input-group span.piece-decrease:before,
+.piece-wrapper .input-group span.piece-increase:before {
+    position: absolute;
+    width: 1px;
+    height: 22px;
+    background-color: #f38509;
+    top: 50%;
+    right: 0;
+    content: "";
+    margin-top: -11px;
+}
+.piece-wrapper input {
+    background-color: #fff;
+    max-width: 33%;
+    text-align: center;
+    color: #707070;
+    border: none;
+}
+.shopping select {
+    height: 50px;
+    border: 1px solid #f38509;
+}
+.shopping select:focus {
+    border-color: #f38509;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(206, 107, 0, 0.4);
+}
+.thumb-sliders-buttons {
+    font-size: 25px;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+.thumb-sliders-buttons span:hover {
+    color: #f38509;
+}
+.add-to-card {
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+    padding: 0;
+}
+.add-to-card:hover {
+    background-color: #ae5d04;
+}
+.discount-rate {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #f38509;
+    height: 65px;
+    width: 65px;
+    padding: 5px;
+    text-align: center;
+    color: #fff;
+    font-weight: normal;
+    line-height: 30px;
+    font-size: 18px;
+    border-radius: 5px;
+}
+.discount-rate span {
+    font-size: 12px;
+    line-height: 20px;
+}
+.accordion-item {
+    border-color: #f38509;
+}
+.accordion-button:not(.collapsed) {
+    background-color: #f38509;
+    color: #fff;
+}
+.accordion-button:focus {
+    border-color: #f38509;
+    box-shadow: none;
+}
+.accordion-button:focus-visible{
+    border-color: #f38509;
+    box-shadow: none;
+}
+.big-slider {
+    padding: 10px 50px !important;
+}
+.slider,
+.swiper-container,
+.brand-swiper,
+.season-product-swiper {
+    overflow-x: hidden;
+}
+.product-image-wrapper .swiper-button-prev:after,
+.product-image-wrapper .swiper-button-next:after {
+    font-size: 25px;
+    color: #f38509;
+}
 @media only screen and (max-width:768px) {
 
 }

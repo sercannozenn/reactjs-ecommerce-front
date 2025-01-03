@@ -1,14 +1,16 @@
 import Header from "../components/mainLayouts/Header.tsx";
 import Footer from "../components/mainLayouts/Footer.tsx";
 import {TbBrandWhatsapp} from "react-icons/tb";
-import {Outlet} from "react-router";
 
+interface MainLayoutProps {
+    children: React.ReactNode;
+}
 
-const MainLayout = () => {
+const MainLayout = (props: MainLayoutProps) => {
     return (
         <div>
             <Header/>
-            <main><Outlet/></main>
+            <main>{props.children}</main>
             <Footer/>
             <a
                 href="https://wa.me/905555555555?text=Merhaba, sizinle iletişime geçmek istiyorum."
