@@ -18,6 +18,7 @@ import 'react-vertical-timeline-component/style.min.css';
 import { TfiAnnouncement } from "react-icons/tfi";
 import { FcCalendar } from "react-icons/fc";
 
+import urun from '../assets/images/urun1.webp';
 import {parseInlineStyle} from "../utils/style.ts";
 import {Product} from "../types/Product.ts";
 import {ProductService} from "../api/services/ProductService.ts";
@@ -219,6 +220,175 @@ function Index() {
                                             </div>
                                         </SwiperSlide>
                                     ))}
+
+
+
+
+
+
+
+                                    <SwiperSlide>
+                                        <div className="wrapper-product position-relative">
+                                            <div className="product-image position-relative">
+                                                <a href="">
+                                                    <img src={urun} className="img-fluid" alt="Adidas"/>
+                                                </a>
+                                                <div className="product-overlay">
+                                                    <span className="product-tag text-orange-bold fw-bold-600">Yeni</span>
+                                                    <span className="favorite"><i className="bi bi-heart"></i></span>
+                                                    <span className="un-favorite"><i
+                                                        className="bi bi-heart-fill"></i></span>
+                                                    <a href="" className="product-brand text-orange-bold fw-bold-600">
+                                                        Adidas
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div className="product-info text-center pt-3">
+                                                <h4 className="product-title">Niteball</h4>
+                                                <div className="text-muted product-description">
+                                                    Unisex Sneaker
+                                                </div>
+                                                <a href="" className="product-price text-orange-bold">
+                                                    1.299,00 TL
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </SwiperSlide>
+                                    <SwiperSlide>
+                                        <div className="wrapper-product position-relative">
+                                            <div className="product-image position-relative">
+                                                <a href="">
+                                                    <img src={urun} className="img-fluid" alt="Adidas"/>
+                                                </a>
+                                                <div className="product-overlay">
+                                                    <span className="product-tag text-orange-bold fw-bold-600">Yeni</span>
+                                                    <span className="favorite"><i className="bi bi-heart"></i></span>
+                                                    <span className="un-favorite"><i
+                                                        className="bi bi-heart-fill"></i></span>
+                                                    <a href="" className="product-brand text-orange-bold fw-bold-600">
+                                                        Adidas
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div className="product-info text-center pt-3">
+                                                <h4 className="product-title">Niteball</h4>
+                                                <div className="text-muted product-description">
+                                                    Unisex Sneaker
+                                                </div>
+                                                <a href="" className="product-price text-orange-bold">
+                                                    1.299,00 TL
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </SwiperSlide>
+                                    <SwiperSlide>
+                                        <div className="wrapper-product position-relative">
+                                            <div className="product-image position-relative">
+                                                <a href="">
+                                                    <img src={urun} className="img-fluid" alt="Adidas"/>
+                                                </a>
+                                                <div className="product-overlay">
+                                                    <span className="product-tag text-orange-bold fw-bold-600">Yeni</span>
+                                                    <span className="favorite"><i className="bi bi-heart"></i></span>
+                                                    <span className="un-favorite"><i
+                                                        className="bi bi-heart-fill"></i></span>
+                                                    <a href="" className="product-brand text-orange-bold fw-bold-600">
+                                                        Adidas
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div className="product-info text-center pt-3">
+                                                <h4 className="product-title">Niteball</h4>
+                                                <div className="text-muted product-description">
+                                                    Unisex Sneaker
+                                                </div>
+                                                <a href="" className="product-price text-orange-bold">
+                                                    1.299,00 TL
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </SwiperSlide>
+                                    <SwiperSlide>
+                                        <div className="wrapper-product position-relative">
+                                            <div className="product-image position-relative">
+                                                <a href="">
+                                                    <img src={urun} className="img-fluid" alt="Adidas"/>
+                                                </a>
+                                                <div className="product-overlay">
+                                                    <span className="product-tag text-orange-bold fw-bold-600">Yeni</span>
+                                                    <span className="favorite"><i className="bi bi-heart"></i></span>
+                                                    <span className="un-favorite"><i
+                                                        className="bi bi-heart-fill"></i></span>
+                                                    <a href="" className="product-brand text-orange-bold fw-bold-600">
+                                                        Adidas
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div className="product-info text-center pt-3">
+                                                <h4 className="product-title">Niteball</h4>
+                                                <div className="text-muted product-description">
+                                                    Unisex Sneaker
+                                                </div>
+                                                <a href="" className="product-price text-orange-bold">
+                                                    1.299,00 TL
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </SwiperSlide>
+                                    <SwiperSlide>
+                                        <div className="wrapper-product position-relative">
+                                            <div className="product-image position-relative">
+                                                <a href="">
+                                                    <img src={urun} className="img-fluid" alt="Adidas"/>
+                                                </a>
+                                                <div className="product-overlay">
+                                                    <span className="product-tag text-orange-bold fw-bold-600">Yeni</span>
+                                                    <span className="favorite"><i className="bi bi-heart"></i></span>
+                                                    <span className="un-favorite"><i
+                                                        className="bi bi-heart-fill"></i></span>
+                                                    <a href="" className="product-brand text-orange-bold fw-bold-600">
+                                                        Adidas
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div className="product-info text-center pt-3">
+                                                <h4 className="product-title">Niteball</h4>
+                                                <div className="text-muted product-description">
+                                                    Unisex Sneaker
+                                                </div>
+                                                <a href="" className="product-price text-orange-bold">
+                                                    1.299,00 TL
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </SwiperSlide>
+                                    <SwiperSlide>
+                                        <div className="wrapper-product position-relative">
+                                            <div className="product-image position-relative">
+                                                <a href="">
+                                                    <img src={urun} className="img-fluid" alt="Adidas"/>
+                                                </a>
+                                                <div className="product-overlay">
+                                                    <span className="product-tag text-orange-bold fw-bold-600">Yeni</span>
+                                                    <span className="favorite"><i className="bi bi-heart"></i></span>
+                                                    <span className="un-favorite"><i
+                                                        className="bi bi-heart-fill"></i></span>
+                                                    <a href="" className="product-brand text-orange-bold fw-bold-600">
+                                                        Adidas
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div className="product-info text-center pt-3">
+                                                <h4 className="product-title">Niteball</h4>
+                                                <div className="text-muted product-description">
+                                                    Unisex Sneaker
+                                                </div>
+                                                <a href="" className="product-price text-orange-bold">
+                                                    1.299,00 TL
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </SwiperSlide>
 
                                 </Swiper>
                             </div>
