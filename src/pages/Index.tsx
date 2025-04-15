@@ -1,8 +1,9 @@
-import {useRef, useState} from "react";
+import { useEffect, useRef, useState } from "react";
 
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {Navigation, Autoplay} from 'swiper/modules';
-
+import { SliderService } from "../api/services/SliderService";
+import { Slider } from "../types/Slider";
 // @ts-ignore
 import "swiper/css";
 // @ts-ignore
@@ -18,7 +19,10 @@ import { TfiAnnouncement } from "react-icons/tfi";
 import { FcCalendar } from "react-icons/fc";
 
 import urun from '../assets/images/urun1.webp';
-import slider from '../assets/images/slider.jpg';
+import {parseInlineStyle} from "../utils/style.ts";
+import {Product} from "../types/Product.ts";
+import {ProductService} from "../api/services/ProductService.ts";
+// import slider from '../assets/images/slider.jpg';
 
 function Index() {
     const prevRef = useRef(null);
@@ -51,6 +55,8 @@ function Index() {
         },
     ];
     const [visibleCount, setVisibleCount] = useState(2); // Başlangıçta 3 öğe göster
+    const [sliders, setSliders] = useState<Slider[]>([]);
+    const [latestProducts, setLatestProducts] = useState<Product[]>([]);
 
     // Gösterilecek öğeleri hesapla
     const visibleData = timelineData.slice(0, visibleCount);
@@ -59,6 +65,31 @@ function Index() {
     const loadMore = () => {
         setVisibleCount((prevCount) => prevCount + 2); // 2 adet daha ekle
     };
+
+    useEffect(() => {
+        const fetchSlider = async () => {
+            try {
+                const data = await SliderService.getAll();
+                setSliders(data.filter(item => item.is_active)); // sadece aktifler
+            } catch (error) {
+                console.error("Slider verisi çekilirken hata:", error);
+            }
+        };
+        const fetchLatestProducts = async () => {
+            try {
+                const data = await ProductService.getLatest(8);
+                setLatestProducts(data);
+            } catch (error) {
+                console.error("Ürünler çekilirken hata:", error);
+            }
+        };
+
+
+        fetchSlider();
+        fetchLatestProducts()
+    }, []);
+
+
     return (
         <>
             <section className="slider position-relative bg-orange mt-2">
@@ -68,46 +99,46 @@ function Index() {
                     slidesPerView={1}
                     onSlideChange={() => console.log('slide change')}
                 >
-                    <SwiperSlide>
-                        <div className="slide">
-                            <img src={slider}
-                                 alt="slider"/>
-                        </div>
-                        <div className="slider-title">
-                            <div className="title-wrapper">
-                                <h3 className="font-playfair fw-bold-600">
-                                    1112
-                                </h3>
-                                <h2 className="fw-bold-600 text-white">
-                                    22
-                                </h2>
-                                <a href="#" target="self" className="btn btn-outline-dark text-center mt-3">
-                                    tıkla
-                                </a>
+                    {sliders.map((slider) => (
+                        <SwiperSlide key={slider.id}>
+                            <div className="slide">
+                                <img src={slider.path_url} alt="slider" />
                             </div>
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div className="slide">
-                            <img src={slider}
-                                 alt="slider"/>
-                        </div>
-                        <div className="slider-title">
-                            <div className="title-wrapper">
-                                <h3 className="font-playfair fw-bold-600">
-                                    1112
-                                </h3>
-                                <h2 className="fw-bold-600 text-white">
-                                    22
-                                </h2>
-                                <a href="#" target="self" className="btn btn-outline-dark text-center mt-3">
-                                    tıkla
-                                </a>
+                            <div className="slider-title">
+                                <div className="title-wrapper">
+                                    <h3
+                                        className="font-playfair fw-bold-600"
+                                        style={{
+                                            color: slider.row_1_color,
+                                            ...parseInlineStyle(slider.row_1_css || '')
+                                        }}
+                                    >
+                                        {slider.row_1_text}
+                                    </h3>
+                                    <h2
+                                        className="fw-bold-600 text-white"
+                                        style={{
+                                            color: slider.row_2_color,
+                                            ...parseInlineStyle(slider.row_2_css || '')
+                                        }}
+                                    >
+                                        {slider.row_2_text}
+                                    </h2>
+                                    <a
+                                        href={slider.button_url}
+                                        target={slider.button_target}
+                                        className="btn btn-outline-dark text-center mt-3"
+                                        style={{
+                                            color: slider.button_color,
+                                            ...parseInlineStyle(slider.button_css || '')
+                                        }}
+                                    >
+                                        {slider.button_text}
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                    </SwiperSlide>
-
-
+                        </SwiperSlide>
+                    ))}
                 </Swiper>
             </section>
 
@@ -157,6 +188,45 @@ function Index() {
                                     }}
                                     onSlideChange={() => console.log('slide change')}
                                 >
+
+                                    {latestProducts.map((product) => (
+                                        <SwiperSlide key={product.id}>
+                                            <div className="wrapper-product position-relative">
+                                                <div className="product-image position-relative">
+                                                    <a href="#">
+                                                        <img
+                                                            src={product.featured_image.image_url}
+                                                            className="img-fluid"
+                                                            alt={product.name}
+                                                        />
+                                                    </a>
+                                                    <div className="product-overlay">
+                                                        <span className="product-tag text-orange-bold fw-bold-600">Yeni</span>
+                                                        <a href="#" className="product-brand text-orange-bold fw-bold-600">
+                                                            {product.brand?.name || 'Markasız'}
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div className="product-info text-center pt-3">
+                                                    <h4 className="product-title">{product.name}</h4>
+                                                    <div
+                                                        className="text-muted product-description"
+                                                        dangerouslySetInnerHTML={{ __html: product.short_description }}
+                                                    />
+                                                    <a href="#" className="product-price text-orange-bold">
+                                                        {product.latest_price?.price_discount || product.latest_price?.price} TL
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </SwiperSlide>
+                                    ))}
+
+
+
+
+
+
+
                                     <SwiperSlide>
                                         <div className="wrapper-product position-relative">
                                             <div className="product-image position-relative">
