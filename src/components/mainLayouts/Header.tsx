@@ -12,7 +12,7 @@ function Header() {
                             <li><a href="#" className="text-white">KAYIT</a></li>
                             <li><a href="#" className="text-white">SEPETİM</a></li>
                             <li className="dropdown user-basket position-relative">
-                                <a href="javascript:void(0)" className="dropdown-toggle position-relative" role="button"
+                                <a href="#" className="dropdown-toggle position-relative" role="button"
                                    data-bs-toggle="dropdown" aria-expanded="false">
                                     <i className="bi bi-cart zoom text-white fs-4"></i>
                                     <span className="item-count bg-orange-bold text-black">13</span>
@@ -145,7 +145,7 @@ function Header() {
                                 <li className="nav-item dropdown">
                                     <a className="nav-link dropdown-toggle"
                                        aria-current="page"
-                                       href="javascript:void(0)"
+                                       href="#"
                                        data-bs-toggle="dropdown"
                                        role="button">
                                         MARKALAR
@@ -189,7 +189,7 @@ function Header() {
                                 <li className="nav-item dropdown">
                                     <a className="nav-link dropdown-toggle"
                                        aria-current="page"
-                                       href="javascript:void(0)"
+                                       href="#"
                                        data-bs-toggle="dropdown"
                                        role="button"
                                        aria-expanded="false">
@@ -241,7 +241,7 @@ function Header() {
                                 </li>
                                 <li className="nav-item dropdown">
                                     <a className="nav-link dropdown-toggle" aria-current="page"
-                                       href="javascript:void(0)" data-bs-toggle="dropdown" role="button">
+                                       href="#" data-bs-toggle="dropdown" role="button">
                                         ERKEK
                                     </a>
                                     <div className="dropdown-menu">
@@ -291,7 +291,7 @@ function Header() {
                                 <li className="nav-item dropdown">
                                     <a className="nav-link dropdown-toggle"
                                        aria-current="page"
-                                       href="javascript:void(0)"
+                                       href="#"
                                        data-bs-toggle="dropdown"
                                        role="button">
                                         ÇOCUK

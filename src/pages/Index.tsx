@@ -1,9 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 
-import {Swiper, SwiperSlide} from 'swiper/react';
-import {Navigation, Autoplay} from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Autoplay } from 'swiper/modules';
 import { SliderService } from "../api/services/SliderService";
 import { Slider } from "../types/Slider";
+import { Product } from "../types/Product.ts";
+import { ProductService } from "../api/services/ProductService.ts";
+import { AnnouncementService } from '../api/services/AnnouncementService';
+import { Announcement } from '../types/Announcement';
+
+import {parseInlineStyle} from "../utils/style.ts";
+
+
 // @ts-ignore
 import "swiper/css";
 // @ts-ignore
@@ -13,57 +21,53 @@ import "swiper/css/pagination";
 // @ts-ignore
 import "swiper/css/scrollbar";
 
-import {VerticalTimeline, VerticalTimelineElement} from 'react-vertical-timeline-component';
+import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import { TfiAnnouncement } from "react-icons/tfi";
 import { FcCalendar } from "react-icons/fc";
 
-import {parseInlineStyle} from "../utils/style.ts";
-import {Product} from "../types/Product.ts";
-import {ProductService} from "../api/services/ProductService.ts";
-// import slider from '../assets/images/slider.jpg';
+import dayjs from 'dayjs';
+import 'dayjs/locale/tr';
+dayjs.locale('tr');
 
 function Index() {
     const prevRef = useRef(null);
     const nextRef = useRef(null);
 
-    const timelineData = [
-        {
-            id: 1,
-            date: "2024-01-01",
-            title: "Başlangıç",
-            description: "Bu bizim başlangıcımız.",
-            icon: <TfiAnnouncement/>, // Dinamik ikon
-            iconStyle: {background: "rgb(33, 150, 243)", color: "#fff"}, // İkon stili
-        },
-        {
-            id: 2,
-            date: "2024-02-01",
-            title: "İlerleme",
-            description: "Proje ilerliyor.",
-            icon: <FcCalendar/>, // Dinamik ikon
-            iconStyle: {background: "rgb(16, 204, 82)", color: "#fff"}, // İkon stili
-        },
-        {
-            id: 3,
-            date: "2024-03-01",
-            title: "Tamamlanma",
-            description: "Proje tamamlandı.",
-            icon: <FcCalendar/>, // Dinamik ikon
-            iconStyle: {background: "rgb(233, 30, 99)", color: "#fff"}, // İkon stili
-        },
-    ];
-    const [visibleCount, setVisibleCount] = useState(2); // Başlangıçta 3 öğe göster
+
     const [sliders, setSliders] = useState<Slider[]>([]);
     const [latestProducts, setLatestProducts] = useState<Product[]>([]);
-
-    // Gösterilecek öğeleri hesapla
-    const visibleData = timelineData.slice(0, visibleCount);
+    const [announcements, setAnnouncements] = useState<Announcement[]>([]);
+    const [announcementsOffset, setAnnouncementsOffset] = useState(0);
+    const [announcementsHasMore, setAnnouncementsHasMore] = useState(true);
 
     // "Load More" butonuna tıklandığında öğe sayısını artır
-    const loadMore = () => {
-        setVisibleCount((prevCount) => prevCount + 2); // 2 adet daha ekle
+    const loadMore = async () => {
+        const data = await AnnouncementService.getHomepageItems({ offset: announcementsOffset, limit: 2 });
+        setAnnouncements(prev => [...prev, ...data]);
+        setAnnouncementsOffset(prev => prev + data.length);
+        if (data.length < 2) {
+            setAnnouncementsHasMore(false); // daha fazla veri yok
+        }
     };
+    const loadMoreAll = () => {
+
+    }
+
+    const getIconData = (type: string) => {
+        if (type === 'announcement') {
+            return {
+                icon: <TfiAnnouncement />,
+                iconStyle: { background: "rgb(33, 150, 243)", color: "#fff" }
+            };
+        }
+
+        return {
+            icon: <FcCalendar />,
+            iconStyle: { background: "rgb(16, 204, 82)", color: "#fff" }
+        };
+    };
+
 
     useEffect(() => {
         const fetchSlider = async () => {
@@ -82,8 +86,15 @@ function Index() {
                 console.error("Ürünler çekilirken hata:", error);
             }
         };
+        const fetchAnnouncements = async () => {
+            const data = await AnnouncementService.getHomepageItems({ limit: 2, offset: announcements.length });
 
+            setAnnouncements(data);
+            setAnnouncementsOffset(data.length);
+            setAnnouncementsHasMore(data.length === 2)
+        };
 
+        fetchAnnouncements();
         fetchSlider();
         fetchLatestProducts()
     }, []);
@@ -105,33 +116,27 @@ function Index() {
                             </div>
                             <div className="slider-title">
                                 <div className="title-wrapper">
-                                    <h3
-                                        className="font-playfair fw-bold-600"
+                                    <h3 className="font-playfair fw-bold-600"
                                         style={{
                                             color: slider.row_1_color,
                                             ...parseInlineStyle(slider.row_1_css || '')
-                                        }}
-                                    >
+                                        }}>
                                         {slider.row_1_text}
                                     </h3>
-                                    <h2
-                                        className="fw-bold-600 text-white"
+                                    <h2 className="fw-bold-600 text-white"
                                         style={{
                                             color: slider.row_2_color,
                                             ...parseInlineStyle(slider.row_2_css || '')
-                                        }}
-                                    >
+                                        }}>
                                         {slider.row_2_text}
                                     </h2>
-                                    <a
-                                        href={slider.button_url}
+                                    <a href={slider.button_url}
                                         target={slider.button_target}
                                         className="btn btn-outline-dark text-center mt-3"
                                         style={{
                                             color: slider.button_color,
                                             ...parseInlineStyle(slider.button_css || '')
-                                        }}
-                                    >
+                                        }}>
                                         {slider.button_text}
                                     </a>
                                 </div>
@@ -251,30 +256,39 @@ function Index() {
                             <div className="col-md-12 px-0">
                                 <h3>Etkinlik ve Duyurular</h3>
                                 <VerticalTimeline className="w-100">
-                                    {visibleData.map((item) => (
-                                        <VerticalTimelineElement
-                                            className="vertical-timeline-element--work"
-                                            textClassName="bg-orange-bold"
-                                            contentStyle={{ color: '#fff'}}
-                                            contentArrowStyle={{borderRight: '7px solid  rgb(33, 150, 243)'}}
-                                            key={item.id}
-                                            date={item.date}
-                                            dateClassName="text-dark"
-                                            icon={item.icon}
-                                            iconStyle={item.iconStyle}
-                                        >
-                                            <h3>{item.title}</h3>
-                                            <p>{item.description}</p>
-                                        </VerticalTimelineElement>
-                                    ))}
+                                    {announcements.map((item) => {
+                                        const { icon, iconStyle } = getIconData(item.type);
+
+                                        return (
+                                            <VerticalTimelineElement
+                                                className="vertical-timeline-element--work"
+                                                textClassName="bg-orange-bold"
+                                                contentStyle={{ color: '#fff'}}
+                                                contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
+                                                key={item.id}
+                                                date={dayjs(item.date).format('D MMMM YYYY')}
+                                                dateClassName="text-dark"
+                                                icon={icon}
+                                                iconStyle={iconStyle}
+                                            >
+                                                <h3>{item.title}</h3>
+                                                <div dangerouslySetInnerHTML={{ __html: item.description }} />
+                                            </VerticalTimelineElement>
+                                        );
+                                    })}
+
                                 </VerticalTimeline>
 
-                                {visibleCount < timelineData.length && (
+                                {announcementsHasMore && (
                                     <div style={{textAlign: "center", marginTop: "20px"}}>
-                                        <button onClick={loadMore} style={{padding: "10px 20px", fontSize: "16px"}}>
+                                        <button className="me-4" onClick={loadMore} style={{padding: "10px 20px", fontSize: "16px"}}>
                                             Daha Fazla Yükle
                                         </button>
+                                        <button onClick={loadMoreAll} style={{padding: "10px 20px", fontSize: "16px"}}>
+                                            Tümünü Göster
+                                        </button>
                                     </div>
+
                                 )}
                             </div>
                         </div>

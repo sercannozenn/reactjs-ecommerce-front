@@ -3,7 +3,7 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import 'bootstrap-icons/font/bootstrap-icons.min.css';
 import './assets/css/index.css'
 import './assets/css/bootstrap5_additions.css'
-import MainLayout from "./layouts/MainLayout.tsx";
+// import MainLayout from "./layouts/MainLayout.tsx";
 import {Routes, Route} from "react-router";
 import Index from "./pages/Index.tsx";
 import About from "./pages/About.tsx";
@@ -14,14 +14,14 @@ function App() {
 
     return (
         <>
-            <MainLayout>
+            {/*<MainLayout>*/}
                 <Routes>
                     <Route path="/" element={<Index/>}/>
                     <Route path="/about" element={<About/>}/>
                     <Route path="/urun-listesi" element={<ProductList/>}/>
                     <Route path="/urun-detay" element={<ProductDetail/>}/>
                 </Routes>
-            </MainLayout>
+            {/*</MainLayout>*/}
         </>
     )
 }

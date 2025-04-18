@@ -156,7 +156,7 @@ function ProductDetail() {
 
                                 <hr className="my-3"/>
                                 <div className="col-md-12">
-                                    <a href="javascript:void(0)" data-product-id="2"
+                                    <a href="#" data-product-id="2"
                                        className="btn bg-orange add-to-card w-100 text-white">Sepete Ekle</a>
                                 </div>
                             </div>
