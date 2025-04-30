@@ -6,6 +6,7 @@ export interface Product {
     id: number;
     name: string;
     short_description: string;
+    final_price: number;
     latest_price: ProductPrice;
     images: ProductImage[];
     featured_image: ProductImage;

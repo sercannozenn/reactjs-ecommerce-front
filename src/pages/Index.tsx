@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import {useEffect, useRef, useState} from "react";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
@@ -28,6 +28,7 @@ import { FcCalendar } from "react-icons/fc";
 
 import dayjs from 'dayjs';
 import 'dayjs/locale/tr';
+
 dayjs.locale('tr');
 
 function Index() {
@@ -37,6 +38,8 @@ function Index() {
 
     const [sliders, setSliders] = useState<Slider[]>([]);
     const [latestProducts, setLatestProducts] = useState<Product[]>([]);
+
+
     const [announcements, setAnnouncements] = useState<Announcement[]>([]);
     const [announcementsOffset, setAnnouncementsOffset] = useState(0);
     const [announcementsHasMore, setAnnouncementsHasMore] = useState(true);
@@ -93,6 +96,7 @@ function Index() {
             setAnnouncementsOffset(data.length);
             setAnnouncementsHasMore(data.length === 2)
         };
+
 
         fetchAnnouncements();
         fetchSlider();
@@ -218,7 +222,7 @@ function Index() {
                                                         dangerouslySetInnerHTML={{ __html: product.short_description }}
                                                     />
                                                     <a href="#" className="product-price text-orange-bold">
-                                                        {product.latest_price?.price_discount || product.latest_price?.price} TL
+                                                        {product.final_price || product.latest_price?.price_discount || product.latest_price?.price} TL
                                                     </a>
                                                 </div>
                                             </div>

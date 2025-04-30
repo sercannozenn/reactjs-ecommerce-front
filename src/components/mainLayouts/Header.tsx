@@ -1,7 +1,22 @@
 import urun from '../../assets/images/urun1.webp';
 import logo from '../../assets/images/logo.png';
 
+import {Link} from "react-router";
+import { useGetBrandsQuery } from '../../api/services/BrandCacheService'
+import {useGetSubcategoriesQuery} from "../../api/services/CategoryCacheService.ts";
+
 function Header() {
+
+
+    const { data: brands = [], isLoading: bL } = useGetBrandsQuery();
+    const { data: womenCats = [] } = useGetSubcategoriesQuery('kadin');
+    const { data: menCats   = [] } = useGetSubcategoriesQuery('erkek');
+    const { data: childCats = [] } = useGetSubcategoriesQuery('cocuk');
+
+    if (bL) return <div>Markalar yükleniyor…</div>
+
+
+
     return (
         <>
             <div className="top-bar bg-black">
@@ -155,31 +170,22 @@ function Header() {
                                             <div className="col-md-9 nav-brands">
                                                 <h4 className="mb-4">Tüm Markalar</h4>
                                                 <div className="row">
-                                                    <div className="col navbar-column">
-                                                        <a href="#" className="dropdown-link">Miss</a>
-                                                        <a href="#" className="dropdown-link">Miss</a>
-                                                        <a href="#" className="dropdown-link">Miss</a>
-                                                        <a href="#" className="dropdown-link">Miss</a>
-                                                        <a href="#" className="dropdown-link">Miss</a>
-                                                        <a href="#" className="dropdown-link">Miss</a>
-                                                        <a href="#" className="dropdown-link">Miss</a>
-                                                        <a href="#" className="dropdown-link">Miss</a>
-                                                        <a href="#" className="dropdown-link">Miss</a>
-                                                        <a href="#" className="dropdown-link">Miss</a>
-
-                                                    </div>
-                                                    <div className="col navbar-column">
-                                                        <a href="#" className="dropdown-link">Miss</a>
-                                                        <a href="#" className="dropdown-link">Miss</a>
-                                                        <a href="#" className="dropdown-link">Miss</a>
-                                                        <a href="#" className="dropdown-link">Miss</a>
-                                                        <a href="#" className="dropdown-link">Miss</a>
-                                                        <a href="#" className="dropdown-link">Miss</a>
-                                                        <a href="#" className="dropdown-link">Miss</a>
-                                                        <a href="#" className="dropdown-link">Miss</a>
-                                                        <a href="#" className="dropdown-link">Miss</a>
-                                                        <a href="#" className="dropdown-link">Miss</a>
-                                                    </div>
+                                                    {[
+                                                        brands.slice(0, 10),
+                                                        brands.slice(10, 20),
+                                                    ].map((col, ci) => (
+                                                        <div className="col navbar-column" key={ci}>
+                                                            {col.map((brand) => (
+                                                                <Link
+                                                                    key={brand.id}
+                                                                    to={`/brands/${brand.slug}`}
+                                                                    className="dropdown-link"
+                                                                >
+                                                                    {brand.name}
+                                                                </Link>
+                                                            ))}
+                                                        </div>
+                                                    ))}
                                                 </div>
                                             </div>
                                         </div>
@@ -200,40 +206,56 @@ function Header() {
                                             <div className="col-md-9 nav-brands">
                                                 <h4 className="mb-4">Tüm Kategoriler</h4>
                                                 <div className="row">
-                                                    <div className="col navbar-column">
-                                                        <a href="#"
-                                                           className="dropdown-link">Kadın Günlük</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Kadın Originals</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Kadın Koşu</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Kadın Futbol</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Kadın Yürüyüş</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Kadın Outdoor</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Kadın Sandalet</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Kadın Terlik</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Kadın Tenis</a>
-                                                    </div>
-                                                    <div className="col navbar-column">
-                                                        <a href="#"
-                                                           className="dropdown-link">Kadın Skate-KayKay</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Kadın Basketbol</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Kadın Bot</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Kadın Çizme</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Kadın Indoor</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Kadın İlk Adım</a>
-                                                    </div>
+                                                    {[
+                                                        womenCats.slice(0, 10),
+                                                        womenCats.slice(10, 20),
+                                                    ].map((col, ci) => (
+                                                        <div className="col navbar-column" key={ci}>
+                                                            {col.map((woCat) => (
+                                                                <Link
+                                                                    key={woCat.id}
+                                                                    to={`/categories/${woCat.slug}`}
+                                                                    className="dropdown-link"
+                                                                >
+                                                                    {woCat.name}
+                                                                </Link>
+                                                            ))}
+                                                        </div>
+                                                    ))}
+                                                    {/*<div className="col navbar-column">*/}
+                                                    {/*    <a href="#"*/}
+                                                    {/*       className="dropdown-link">Kadın Günlük</a>*/}
+                                                    {/*    <a href="#"*/}
+                                                    {/*       className="dropdown-link">Kadın Originals</a>*/}
+                                                    {/*    <a href="#"*/}
+                                                    {/*       className="dropdown-link">Kadın Koşu</a>*/}
+                                                    {/*    <a href="#"*/}
+                                                    {/*       className="dropdown-link">Kadın Futbol</a>*/}
+                                                    {/*    <a href="#"*/}
+                                                    {/*       className="dropdown-link">Kadın Yürüyüş</a>*/}
+                                                    {/*    <a href="#"*/}
+                                                    {/*       className="dropdown-link">Kadın Outdoor</a>*/}
+                                                    {/*    <a href="#"*/}
+                                                    {/*       className="dropdown-link">Kadın Sandalet</a>*/}
+                                                    {/*    <a href="#"*/}
+                                                    {/*       className="dropdown-link">Kadın Terlik</a>*/}
+                                                    {/*    <a href="#"*/}
+                                                    {/*       className="dropdown-link">Kadın Tenis</a>*/}
+                                                    {/*</div>*/}
+                                                    {/*<div className="col navbar-column">*/}
+                                                    {/*    <a href="#"*/}
+                                                    {/*       className="dropdown-link">Kadın Skate-KayKay</a>*/}
+                                                    {/*    <a href="#"*/}
+                                                    {/*       className="dropdown-link">Kadın Basketbol</a>*/}
+                                                    {/*    <a href="#"*/}
+                                                    {/*       className="dropdown-link">Kadın Bot</a>*/}
+                                                    {/*    <a href="#"*/}
+                                                    {/*       className="dropdown-link">Kadın Çizme</a>*/}
+                                                    {/*    <a href="#"*/}
+                                                    {/*       className="dropdown-link">Kadın Indoor</a>*/}
+                                                    {/*    <a href="#"*/}
+                                                    {/*       className="dropdown-link">Kadın İlk Adım</a>*/}
+                                                    {/*</div>*/}
                                                 </div>
                                             </div>
                                         </div>
@@ -249,40 +271,22 @@ function Header() {
                                             <div className="col-md-9 nav-brands">
                                                 <h4 className="mb-4">Tüm Kategoriler</h4>
                                                 <div className="row">
-                                                    <div className="col navbar-column">
-                                                        <a href="#"
-                                                           className="dropdown-link">Erkek Günlük</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Erkek Originals</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Erkek Koşu</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Erkek Futbol</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Erkek Yürüyüş</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Erkek Outdoor</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Erkek Sandalet</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Erkek Terlik</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Erkek Tenis</a>
-                                                    </div>
-                                                    <div className="col navbar-column">
-                                                        <a href="#"
-                                                           className="dropdown-link">Erkek Skate-KayKay</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Erkek Basketbol</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Erkek Bot</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Erkek Çizme</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Erkek Indoor</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Erkek İlk Adım</a>
-                                                    </div>
+                                                    {[
+                                                        menCats.slice(0, 10),
+                                                        menCats.slice(10, 20),
+                                                    ].map((col, ci) => (
+                                                        <div className="col navbar-column" key={ci}>
+                                                            {col.map((menCat) => (
+                                                                <Link
+                                                                    key={menCat.id}
+                                                                    to={`/categories/${menCat.slug}`}
+                                                                    className="dropdown-link"
+                                                                >
+                                                                    {menCat.name}
+                                                                </Link>
+                                                            ))}
+                                                        </div>
+                                                    ))}
                                                 </div>
                                             </div>
                                         </div>
@@ -301,40 +305,22 @@ function Header() {
                                             <div className="col-md-9 nav-brands">
                                                 <h4 className="mb-4">Tüm Kategoriler</h4>
                                                 <div className="row">
-                                                    <div className="col navbar-column">
-                                                        <a href="#"
-                                                           className="dropdown-link">Çocuk Günlük</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Çocuk Originals</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Çocuk Koşu</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Çocuk Futbol</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Çocuk Yürüyüş</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Çocuk Outdoor</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Çocuk Sandalet</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Çocuk Terlik</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Çocuk Tenis</a>
-                                                    </div>
-                                                    <div className="col navbar-column">
-                                                        <a href="#"
-                                                           className="dropdown-link">Çocuk Skate-KayKay</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Çocuk Basketbol</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Çocuk Bot</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Çocuk Çizme</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Çocuk Indoor</a>
-                                                        <a href="#"
-                                                           className="dropdown-link">Çocuk İlk Adım</a>
-                                                    </div>
+                                                    {[
+                                                        childCats.slice(0, 10),
+                                                        childCats.slice(10, 20),
+                                                    ].map((col, ci) => (
+                                                        <div className="col navbar-column" key={ci}>
+                                                            {col.map((childCat) => (
+                                                                <Link
+                                                                    key={childCat.id}
+                                                                    to={`/categories/${childCat.slug}`}
+                                                                    className="dropdown-link"
+                                                                >
+                                                                    {childCat.name}
+                                                                </Link>
+                                                            ))}
+                                                        </div>
+                                                    ))}
                                                 </div>
                                             </div>
                                         </div>
