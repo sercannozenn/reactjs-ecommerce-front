@@ -4,8 +4,8 @@ import {Category} from "../../types/Category.ts";
 
 interface Props {
     categories: Category[];
-    selected: number[];
-    toggle: (id: number) => void;
+    selected: string[];
+    toggle: (slug: string) => void;
 }
 
 const RecursiveCategoryFilter = ({ categories, selected, toggle }: Props) => {
@@ -24,8 +24,8 @@ const CategoryItem = ({
                           toggle,
                       }: {
     category: Category;
-    selected: number[];
-    toggle: (id: number) => void;
+    selected: string[];
+    toggle: (slug: string) => void;
 }) => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -41,8 +41,8 @@ const CategoryItem = ({
                     value={category.id}
                     id={`cat-${category.id}`}
                     data-id={category.id}
-                    checked={selected.includes(category.id)}
-                    onChange={() => toggle(category.id)}
+                    checked={selected.includes(category.slug)}
+                    onChange={() => toggle(category.slug)}
                 />
                 <label htmlFor={`cat-${category.id}`}>{category.name}</label>
 

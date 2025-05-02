@@ -12,8 +12,8 @@ function ProductList() {
     const { data: filters, isLoading: fL } = useGetFiltersQuery();
 
     const [selectedGenders,    setSelectedGenders]    = useState<string[]>([]);
-    const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
-    const [selectedBrands,     setSelectedBrands]     = useState<number[]>([]);
+    const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+    const [selectedBrands,     setSelectedBrands]     = useState<string[]>([]);
 
     const [search, setSearch] = useState('');
     const [minPrice, setMinPrice] = useState('');
@@ -25,6 +25,7 @@ function ProductList() {
     const [pagination, setPagination] = useState({
         current_page: 1,
         last_page: 1,
+        total: 0
     });
 
     const filterParams = {
@@ -111,8 +112,8 @@ function ProductList() {
         const brandParam = searchParams.get('brands') || '';
 
         setSelectedGenders(genderParam.split(',').filter(Boolean));
-        setSelectedCategories(categoryParam.split(',').filter(Boolean).map(Number));
-        setSelectedBrands(brandParam.split(',').filter(Boolean).map(Number));
+        setSelectedCategories(categoryParam.split(',').filter(Boolean));
+        setSelectedBrands(brandParam.split(',').filter(Boolean));
 
         setSearch(searchParams.get('search') || '');
         setMinPrice(searchParams.get('min_price') || '');
@@ -203,9 +204,9 @@ function ProductList() {
                                                         name="brands"
                                                         value={brand.slug}
                                                         id={`brand-${brand.id}`}
-                                                        checked={selectedBrands.includes(brand.id)}
+                                                        checked={selectedBrands.includes(brand.slug)}
                                                         onChange={() =>
-                                                            toggleSelection(brand.id, selectedBrands, setSelectedBrands)
+                                                            toggleSelection(brand.slug, selectedBrands, setSelectedBrands)
                                                         }
                                                     />
                                                     <label htmlFor={`brand-${brand.id}`}>{brand.name}</label>
@@ -273,7 +274,7 @@ function ProductList() {
                                 <div className="col-12 product-list-info">
                                     <div className="row">
                                         <div className="col">
-                                            <span className="text-decoration-underline product-count fw-bold-600">120 Ürün Listelendi</span>
+                                            <span className="text-decoration-underline product-count fw-bold-600">Toplam {pagination.total} Ürün Listelenmektedir.</span>
                                         </div>
                                         <div className="col">
                                             <select name="sort"

@@ -154,7 +154,7 @@ function Header() {
             <header>
                 <nav className="navbar navbar-expand-lg">
                     <div className="container">
-                        <a className="navbar-brand" href="#">
+                        <a className="navbar-brand" href="/">
                             <img src={logo} alt="Logo" className="logo"/>
                         </a>
                         <button className="navbar-toggler"
@@ -199,7 +199,7 @@ function Header() {
                                                             {col.map((brand) => (
                                                                 <Link
                                                                     key={brand.id}
-                                                                    to={`/brands/${brand.slug}`}
+                                                                    to={`/urun-listesi/?brands=${brand.slug}`}
                                                                     className="dropdown-link"
                                                                 >
                                                                     {brand.name}
@@ -235,7 +235,7 @@ function Header() {
                                                             {col.map((woCat) => (
                                                                 <Link
                                                                     key={woCat.id}
-                                                                    to={`/categories/${woCat.slug}`}
+                                                                    to={`/urun-listesi/?categories=${woCat.slug}`}
                                                                     className="dropdown-link"
                                                                 >
                                                                     {woCat.name}
@@ -300,7 +300,7 @@ function Header() {
                                                             {col.map((menCat) => (
                                                                 <Link
                                                                     key={menCat.id}
-                                                                    to={`/categories/${menCat.slug}`}
+                                                                    to={`/urun-listesi/?categories=${menCat.slug}`}
                                                                     className="dropdown-link"
                                                                 >
                                                                     {menCat.name}
@@ -334,7 +334,7 @@ function Header() {
                                                             {col.map((childCat) => (
                                                                 <Link
                                                                     key={childCat.id}
-                                                                    to={`/categories/${childCat.slug}`}
+                                                                    to={`/urun-listesi/?categories=${childCat.slug}`}
                                                                     className="dropdown-link"
                                                                 >
                                                                     {childCat.name}
