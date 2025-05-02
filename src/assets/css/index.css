@@ -687,3 +687,31 @@ Image Slider Latest Added Product
 @media only screen and (max-width:768px) {
 
 }
+
+
+/* Pagination */
+.pagination li.active a,
+.pagination li a:hover {
+    background: #ffe115;
+    color: #2d3a4b !important;
+}
+
+.pagination li a {
+    background-color: #2d3a4b;
+    color: #fff !important;
+    margin: 0 2px;
+    height: 23px;
+    width: 23px;
+    text-align: center;
+    line-height: 23px;
+    font-size: 12px;
+    position: relative;
+    float: left;
+    cursor: pointer;
+}
+.pagination li a.disabled {
+    pointer-events: none;
+    background-color: #ccc !important;
+    color: #888 !important;
+    cursor: not-allowed;
+}

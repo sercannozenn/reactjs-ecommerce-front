@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import routes from './routes';
 import MainLayout from '../layouts/MainLayout';
 import ProtectedRoute from './ProtectedRoute';
+import {Suspense} from "react";
 
 const getLayoutComponent = (layout: string, element: React.ReactElement, isProtected: boolean) => {
     const wrapped = isProtected ? <ProtectedRoute>{element}</ProtectedRoute> : element;
@@ -20,5 +21,10 @@ const router = createBrowserRouter(
     }))
 );
 
-const AppRouter = () => <RouterProvider router={router} />;
+// const AppRouter = () => <RouterProvider router={router} />;
+const AppRouter = () => (
+    <Suspense fallback={<div>Yükleniyor...</div>}>
+        <RouterProvider router={router} />
+    </Suspense>
+);
 export default AppRouter;

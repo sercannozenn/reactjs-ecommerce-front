@@ -4,8 +4,8 @@ import {Category} from "../../types/Category.ts";
 
 interface Props {
     categories: Category[];
-    selected: string[];
-    toggle: (slug: string) => void;
+    selected: number[];
+    toggle: (id: number) => void;
 }
 
 const RecursiveCategoryFilter = ({ categories, selected, toggle }: Props) => {
@@ -24,8 +24,8 @@ const CategoryItem = ({
                           toggle,
                       }: {
     category: Category;
-    selected: string[];
-    toggle: (slug: string) => void;
+    selected: number[];
+    toggle: (id: number) => void;
 }) => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -38,11 +38,11 @@ const CategoryItem = ({
                     type="checkbox"
                     name="categories"
                     className="form-check-input parent-category"
-                    value={category.slug}
+                    value={category.id}
                     id={`cat-${category.id}`}
                     data-id={category.id}
-                    checked={selected.includes(category.slug)}
-                    onChange={() => toggle(category.slug)}
+                    checked={selected.includes(category.id)}
+                    onChange={() => toggle(category.id)}
                 />
                 <label htmlFor={`cat-${category.id}`}>{category.name}</label>
 
