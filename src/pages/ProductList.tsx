@@ -47,9 +47,7 @@ function ProductList() {
 
 
 
-    if (fL || !filters) return <div>Filtreler yükleniyor…</div>;
 
-    const { genders, categories, brands } = filters!;
 
 
     function toggleSelection<T>(value: T, selectedArr: T[], setter: Dispatch<SetStateAction<T[]>>) {
@@ -162,7 +160,8 @@ function ProductList() {
         page
     ]);
 
-
+    if (fL || !filters) return <div>Filtreler yükleniyor…</div>;
+    const { genders, categories, brands } = filters!;
 
     return (
         <>
