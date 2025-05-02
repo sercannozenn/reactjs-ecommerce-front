@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage'; // localStorage kullanımı iç
 import { persistReducer, persistStore } from 'redux-persist';
 import {BrandCacheService} from "../api/services/BrandCacheService.ts";
 import {CategoryCacheService} from "../api/services/CategoryCacheService.ts";
+import {FilterCacheService} from "../api/services/FilterCacheService.ts";
 
 const persistConfig = {
     key: 'root',
@@ -11,7 +12,8 @@ const persistConfig = {
     whitelist: [
         'auth',
         BrandCacheService.reducerPath,
-        CategoryCacheService.reducerPath
+        CategoryCacheService.reducerPath,
+        FilterCacheService.reducerPath,
     ], // sadece auth saklanacak
 };
 
@@ -19,6 +21,7 @@ const rootReducer = combineReducers({
     auth: authSlice,
     [BrandCacheService.reducerPath]: BrandCacheService.reducer,
     [CategoryCacheService.reducerPath]: CategoryCacheService.reducer,
+    [FilterCacheService.reducerPath]: FilterCacheService.reducer,
 
 });
 
@@ -32,6 +35,7 @@ const store = configureStore({
         }).concat([
             BrandCacheService.middleware,
             CategoryCacheService.middleware,
+            FilterCacheService.middleware,
         ]),
 });
 

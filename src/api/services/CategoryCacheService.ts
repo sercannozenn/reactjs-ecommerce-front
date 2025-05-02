@@ -10,9 +10,9 @@ export const CategoryCacheService = createApi({
     tagTypes: ['Category'],
     endpoints: (builder) => ({
         getSubcategories: builder.query<Category[], string>({
-            async queryFn(slug) {
+            async queryFn(arg, _api, _extra, _fetchWithBQ) {
                 try {
-                    const data = await CategoryService.getSubcategories(slug)
+                    const data = await CategoryService.getSubcategories(arg)
                     return { data }
                 } catch (err: any) {
                     return { error: { status: err.response?.status ?? 'FETCH_ERROR', data: err.message } }
