@@ -4,8 +4,27 @@ import logo from '../../assets/images/logo.png';
 import {Link} from "react-router";
 import { useGetBrandsQuery } from '../../api/services/BrandCacheService'
 import {useGetSubcategoriesQuery} from "../../api/services/CategoryCacheService.ts";
+import React, {useEffect, useState} from "react";
+import {useRouteNavigator} from "../../router/RouteHelper.ts";
+import {useSearchParams} from "react-router-dom";
 
 function Header() {
+    const navigateToRoute = useRouteNavigator();
+    const [searchParams] = useSearchParams();
+    const [searchText, setSearchText] = useState('');
+
+    useEffect(() => {
+        const q = searchParams.get('search') || '';
+        setSearchText(q);
+    }, [searchParams]);
+    const handleSearchSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (searchText.trim()) {
+            navigateToRoute('ProductList', {
+                search: searchText,
+            });
+        }
+    };
 
 
     const { data: brands = [], isLoading: bL } = useGetBrandsQuery();
@@ -148,12 +167,14 @@ function Header() {
                             <span className="navbar-toggler-icon"></span>
                         </button>
                         <div className="collapse navbar-collapse ms-auto" id="navbarSupportedContent">
-                            <form className="d-flex mx-auto mt-4 mb-4 mt-lg-0" style={{flexGrow: 1, maxWidth: "500px"}}>
+                            <form onSubmit={handleSearchSubmit} className="d-flex mx-auto mt-4 mb-4 mt-lg-0" style={{flexGrow: 1, maxWidth: "500px"}}>
                                 <input
                                     className="form-control me-2 search-input"
                                     type="search"
                                     placeholder="Ürün Ara"
                                     aria-label="Search"
+                                    value={searchText}
+                                    onChange={(e) => setSearchText(e.target.value)}
                                 />
                             </form>
                             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
