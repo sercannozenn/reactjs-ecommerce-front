@@ -8,13 +8,16 @@ import { useSearchParams } from 'react-router-dom';
 
 function ProductList() {
     const [searchParams, setSearchParams] = useSearchParams();
+    const [isParamsInitialized, setIsParamsInitialized] = useState(false); // URL'den gelen parametrelerin yalnızca bir kez okunup filtre state'lerine set edilmesini kontrol eder
 
-    const { data: filters, isLoading: fL } = useGetFiltersQuery();
+    const { data: filters } = useGetFiltersQuery(); // API'den tüm filtre seçeneklerini alır (gender, category, brand)
 
-    const [selectedGenders,    setSelectedGenders]    = useState<string[]>([]);
+    // Filtre state'leri
+    const [selectedGenders, setSelectedGenders] = useState<string[]>([]);
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-    const [selectedBrands,     setSelectedBrands]     = useState<string[]>([]);
+    const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
 
+    // Diğer filtre ve sıralama state'leri
     const [search, setSearch] = useState('');
     const [minPrice, setMinPrice] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
@@ -28,6 +31,10 @@ function ProductList() {
         total: 0
     });
 
+    const [products, setProducts] = useState<Product[]>([]);
+    const [isLoadingProducts, setIsLoadingProducts] = useState(false);
+
+    // API'ye gönderilecek filtre parametreleri
     const filterParams = {
         filter: {
             search: search,
@@ -42,38 +49,31 @@ function ProductList() {
         sortOrder: sortDirection,
     };
 
-
-    const [products, setProducts] = useState<Product[]>([]);
-    const [isLoadingProducts, setIsLoadingProducts] = useState(false);
-
-
-
-
-
-
+    // Checkbox türü alanlar için toggle fonksiyonu (seçili ise çıkar, değilse ekle)
     function toggleSelection<T>(value: T, selectedArr: T[], setter: Dispatch<SetStateAction<T[]>>) {
         if (selectedArr.includes(value)) {
             setter(selectedArr.filter(item => item !== value));
         } else {
             setter([...selectedArr, value]);
         }
+        setPage(1); // Filtre değişince sayfayı başa al
     }
 
+    // Sıralama dropdown'ı değişince çalışır
     const handleSortChange = (value: string) => {
         let [by, direction] = value.split('_');
-        if (by === 'price'){
-            by = 'final_price';
-        }
+        if (by === 'price') by = 'final_price'; // fiyat için özel alan ismi
         setSortBy(by);
         setSortDirection(direction as 'asc' | 'desc');
-        setSortOrder(value); // UI'de seçili olarak gösterilmesi için
+        setSortOrder(value);
     };
+
+    // Ürünleri filtreye göre getirir
     const fetchProducts = async () => {
         setIsLoadingProducts(true);
         try {
             const data = await ProductService.list(filterParams);
             setProducts(data.data);
-            console.log(data)
             setPagination(data.meta);
         } catch (e) {
             console.error('Ürünler alınamadı', e);
@@ -82,57 +82,40 @@ function ProductList() {
         }
     };
 
+    // İlk açılışta URL parametrelerini okuyup filtre state'lerine set eder (bir kere çalışır)
     useEffect(() => {
-        fetchProducts();
-    }, [
-        search,
-        selectedGenders,
-        selectedCategories,
-        selectedBrands,
-        minPrice,
-        maxPrice,
-        sortOrder,
-    ]);
-    useEffect(() => {
-        fetchProducts();
-    }, [
-        page,
-        search,
-        selectedGenders,
-        selectedCategories,
-        selectedBrands,
-        minPrice,
-        maxPrice,
-        sortBy,
-        sortDirection,
-    ]);
-    useEffect(() => {
-        const genderParam = searchParams.get('genders') || '';
-        const categoryParam = searchParams.get('categories') || '';
-        const brandParam = searchParams.get('brands') || '';
+        if (!isParamsInitialized) {
+            const searchParam = searchParams.get('search') || '';
+            const genderParam = searchParams.get('genders') || '';
+            const categoryParam = searchParams.get('categories') || '';
+            const brandParam = searchParams.get('brands') || '';
+            const minPriceParam = searchParams.get('min_price') || '';
+            const maxPriceParam = searchParams.get('max_price') || '';
+            const sortParam = searchParams.get('sort') || 'id_desc';
+            const pageParam = searchParams.get('page') || '1';
 
-        setSelectedGenders(genderParam.split(',').filter(Boolean));
-        setSelectedCategories(categoryParam.split(',').filter(Boolean));
-        setSelectedBrands(brandParam.split(',').filter(Boolean));
+            let [by, direction] = sortParam.split('_');
+            if (by === 'price') by = 'final_price';
 
-        setSearch(searchParams.get('search') || '');
-        setMinPrice(searchParams.get('min_price') || '');
-        setMaxPrice(searchParams.get('max_price') || '');
-        setSortOrder(searchParams.get('sort') || 'id_desc');
-        setPage(Number(searchParams.get('page') || 1));
+            setSearch(searchParam);
+            setSelectedGenders(genderParam.split(',').filter(Boolean));
+            setSelectedCategories(categoryParam.split(',').filter(Boolean));
+            setSelectedBrands(brandParam.split(',').filter(Boolean));
+            setMinPrice(minPriceParam);
+            setMaxPrice(maxPriceParam);
+            setSortOrder(sortParam);
+            setSortBy(by);
+            setSortDirection(direction as 'asc' | 'desc');
+            setPage(Number(pageParam));
 
-
-
-        const sortParam = searchParams.get('sort') || 'id_desc';
-        let [by, direction] = sortParam.split('_');
-        if (by === 'price'){
-            by = 'final_price';
+            setIsParamsInitialized(true); // Bu flag ile ikinci useEffect'in tetiklenmesini sağlıyoruz
         }
-        setSortOrder(sortParam);
-        setSortBy(by);
-        setSortDirection(direction as 'asc' | 'desc');
-    }, [searchParams]);
+    }, [searchParams, isParamsInitialized]);
+
+    // Filtrelerde herhangi bir değişiklik olduğunda ürünleri getirir ve URL'yi günceller
     useEffect(() => {
+        if (!isParamsInitialized) return;
+
         const params: any = {
             search,
             genders: selectedGenders.join(','),
@@ -144,25 +127,17 @@ function ProductList() {
             page: page.toString(),
         };
 
-        // Boş olanları temizle
+        // Boş değerleri URL'ye yazmamak için temizliyoruz
         Object.keys(params).forEach(key => {
             if (!params[key]) delete params[key];
         });
 
-        setSearchParams(params);
-    }, [
-        search,
-        selectedGenders,
-        selectedCategories,
-        selectedBrands,
-        minPrice,
-        maxPrice,
-        sortOrder,
-        page
-    ]);
+        setSearchParams(params); // URL parametrelerini güncelle
+        fetchProducts(); // Ürünleri getir
+    }, [search, selectedGenders, selectedCategories, selectedBrands, minPrice, maxPrice, sortOrder, page, isParamsInitialized]);
 
-    if (fL || !filters) return <div>Filtreler yükleniyor…</div>;
-    const { genders, categories, brands } = filters!;
+    const { genders, categories, brands } = filters!; // API'den gelen filtre verilerini destructure ediyoruz
+
 
     return (
         <>
