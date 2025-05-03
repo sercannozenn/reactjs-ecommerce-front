@@ -1,5 +1,5 @@
 import urun from '../../assets/images/urun1.webp';
-import logo from '../../assets/images/logo.png';
+import logo_main from '../../assets/images/logo.png';
 
 import {Link} from "react-router";
 import { useGetBrandsQuery } from '../../api/services/BrandCacheService'
@@ -7,8 +7,12 @@ import {useGetSubcategoriesQuery} from "../../api/services/CategoryCacheService.
 import React, {useEffect, useState} from "react";
 import {useRouteNavigator} from "../../router/RouteHelper.ts";
 import {useSearchParams} from "react-router-dom";
+import {useGetSettingsQuery} from "../../api/services/SettingsCacheService.ts";
 
 function Header() {
+    const { data: settings = {} } = useGetSettingsQuery();
+    const logo = settings['logo'] || logo_main;
+
     const navigateToRoute = useRouteNavigator();
     const [searchParams] = useSearchParams();
     const [searchText, setSearchText] = useState('');

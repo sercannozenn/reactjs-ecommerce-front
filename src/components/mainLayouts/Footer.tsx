@@ -1,5 +1,8 @@
+import {useGetSettingsQuery} from "../../api/services/SettingsCacheService.ts";
 
 const Footer = () => {
+    const { data: settings = {} } = useGetSettingsQuery();
+
     return (
         <footer className="custom-footer mt-5">
             <div className="container">
@@ -71,15 +74,15 @@ const Footer = () => {
 
                 {/* Copyright */}
                 <div className="footer-bottom">
-                    <p>&copy; {new Date().getFullYear()} Kermes Satış Sitesi. Tüm hakları saklıdır.</p>
+                    <p>&copy; {new Date().getFullYear()} <span dangerouslySetInnerHTML={{__html: settings['footer_text'] ?? ''}}></span></p>
                     <div className="social-icons">
-                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                        <a href={settings['facebook_link']} target="_blank" rel="noopener noreferrer">
                             <i className="bi bi-facebook"></i>
                         </a>
-                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                        <a href={settings['instagram_link']} target="_blank" rel="noopener noreferrer">
                             <i className="bi bi-instagram"></i>
                         </a>
-                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+                        <a href={settings['twitter_x_link']} target="_blank" rel="noopener noreferrer">
                             <i className="bi bi-twitter"></i>
                         </a>
                     </div>

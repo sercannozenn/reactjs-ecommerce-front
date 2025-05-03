@@ -5,6 +5,7 @@ import { persistReducer, persistStore } from 'redux-persist';
 import {BrandCacheService} from "../api/services/BrandCacheService.ts";
 import {CategoryCacheService} from "../api/services/CategoryCacheService.ts";
 import {FilterCacheService} from "../api/services/FilterCacheService.ts";
+import {SettingsCacheService} from "../api/services/SettingsCacheService.ts";
 
 const persistConfig = {
     key: 'root',
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
     [BrandCacheService.reducerPath]: BrandCacheService.reducer,
     [CategoryCacheService.reducerPath]: CategoryCacheService.reducer,
     [FilterCacheService.reducerPath]: FilterCacheService.reducer,
+    [SettingsCacheService.reducerPath]: SettingsCacheService.reducer,
 
 });
 
@@ -36,6 +38,7 @@ const store = configureStore({
             BrandCacheService.middleware,
             CategoryCacheService.middleware,
             FilterCacheService.middleware,
+            SettingsCacheService.middleware,
         ]),
 });
 
