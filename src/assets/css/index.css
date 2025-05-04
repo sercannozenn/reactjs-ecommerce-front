@@ -558,6 +558,9 @@ Image Slider Latest Added Product
 .price {
     letter-spacing: 1px;
 }
+.del-price {
+    font-size: 12px;
+}
 .product-detail hr {
     border-top: 1px solid rgba(0, 0, 0, 0.6);
 }
@@ -567,6 +570,18 @@ Image Slider Latest Added Product
 .product-detail .product-short-description {
     line-height: 25px;
     letter-spacing: 0.05em;
+}
+
+.product-detail-category:hover {
+    color: #f38509;
+}
+.product-detail-category {
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+.product-detail-category span {
+    font-size: 14px;
+    font-weight: 500;
 }
 .shopping .bi-heart {
     font-size: 30px;

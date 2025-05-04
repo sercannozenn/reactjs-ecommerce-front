@@ -11,7 +11,7 @@ function ProductList() {
     const [isParamsInitialized, setIsParamsInitialized] = useState(false); // URL'den gelen parametrelerin yalnızca bir kez okunup filtre state'lerine set edilmesini kontrol eder
 
     const { data: filters } = useGetFiltersQuery(); // API'den tüm filtre seçeneklerini alır (gender, category, brand)
-
+    console.log(filters);
     // Filtre state'leri
     const [selectedGenders, setSelectedGenders] = useState<string[]>([]);
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -84,6 +84,7 @@ function ProductList() {
 
     // İlk açılışta URL parametrelerini okuyup filtre state'lerine set eder (bir kere çalışır)
     useEffect(() => {
+        console.log("geldi")
         if (!isParamsInitialized) {
             const searchParam = searchParams.get('search') || '';
             const genderParam = searchParams.get('genders') || '';
@@ -114,6 +115,7 @@ function ProductList() {
 
     // Filtrelerde herhangi bir değişiklik olduğunda ürünleri getirir ve URL'yi günceller
     useEffect(() => {
+        console.log("geldi")
         if (!isParamsInitialized) return;
 
         const params: any = {
@@ -136,7 +138,8 @@ function ProductList() {
         fetchProducts(); // Ürünleri getir
     }, [search, selectedGenders, selectedCategories, selectedBrands, minPrice, maxPrice, sortOrder, page, isParamsInitialized]);
 
-    const { genders, categories, brands } = filters!; // API'den gelen filtre verilerini destructure ediyoruz
+    // const { genders, categories, brands } = filters!; // API'den gelen filtre verilerini destructure ediyoruz
+    const { genders = [], categories = [], brands = [] } = filters || {};
 
 
     return (

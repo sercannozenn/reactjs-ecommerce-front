@@ -15,6 +15,7 @@ const persistConfig = {
         BrandCacheService.reducerPath,
         CategoryCacheService.reducerPath,
         FilterCacheService.reducerPath,
+        SettingsCacheService.reducerPath,
     ], // sadece auth saklanacak
 };
 

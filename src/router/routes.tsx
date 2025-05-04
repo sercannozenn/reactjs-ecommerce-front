@@ -29,6 +29,13 @@ const routes = [
         protected: false
     },
     {
+        path: '/urun/:slug',
+        name: 'ProductDetail',
+        element: <ProductDetail />,
+        layout: 'main',
+        protected: false
+    },
+    {
         path: '/urun-detay',
         name: 'ProductDetail',
         element: <ProductDetail />,

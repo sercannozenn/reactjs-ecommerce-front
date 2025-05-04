@@ -1,5 +1,7 @@
-import {useRef} from "react";
+import {useEffect, useRef, useState} from "react";
 import React from "react";
+import {Link, useParams} from "react-router";
+import type { Swiper as SwiperType } from 'swiper';
 
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {Navigation, Thumbs, Zoom} from 'swiper/modules';
@@ -13,35 +15,27 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 // @ts-ignore
 import "swiper/css/zoom";
+import {Product} from "../types/Product.ts";
+import {ProductService} from "../api/services/ProductService.ts";
 
 function ProductDetail() {
+    const { slug } = useParams();
+    const [selectedSize, setSelectedSize] = useState("");
+
     const prevRef = useRef(null);
     const nextRef = useRef(null);
 
-    const [thumbsSwiper, setThumbsSwiper] = React.useState(null);
-    const sliders = [
-        {
-            image: "http://eticaret.com/storage/files/1/laravel_ozgecmis_resume_projesi_16.png"
-        },
-        {
-            image: "http://eticaret.com/storage/files/1/laravel_ozgecmis_resume_projesi_16.png"
-        },
-        {
-            image: "http://eticaret.com/storage/files/1/laravel_ozgecmis_resume_projesi_16.png"
-        },
-        {
-            image: "http://eticaret.com/storage/files/1/laravel_ozgecmis_resume_projesi_16.png"
-        },
-        {
-            image: "http://eticaret.com/storage/files/1/laravel_ozgecmis_resume_projesi_16.png"
-        },
-        {
-            image: "http://eticaret.com/storage/files/1/laravel_ozgecmis_resume_projesi_16.png"
-        },
-    ]
-    // @ts-ignore
-    // @ts-ignore
-    // @ts-ignore
+    const [product, setProduct] = useState<Product | null>(null);
+    useEffect(() => {
+        if (slug) {
+            ProductService.getDetail(slug)
+                .then(data => setProduct(data))
+                .catch(err => console.error("Ürün detayı alınamadı", err));
+        }
+    }, [slug]);
+
+    const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
+
     return (
         <>
             <div className="container">
@@ -57,12 +51,12 @@ function ProductDetail() {
                                 className=""
                                 fadeEffect={{crossFade: true}}
                             >
-                                {sliders.map((slider) => (
-                                    <SwiperSlide className="big-slider big-image">
+                                {product?.images.map((image) => (
+                                    <SwiperSlide className="big-slider big-image" key={image.id}>
                                         <div className="swiper-zoom-container">
                                             <img className="w-100"
-                                                 src={slider.image}
-                                                 alt="Product"/>
+                                                 src={image.image_url}
+                                                 alt={product?.name}/>
                                         </div>
                                     </SwiperSlide>
                                 ))}
@@ -76,25 +70,26 @@ function ProductDetail() {
                                     nextEl: nextRef.current,
                                 }}
                                 onInit={(swiper) => {
-                                    // @ts-ignore
-                                    swiper.params.navigation.prevEl = prevRef.current;
-                                    // @ts-ignore
-                                    swiper.params.navigation.nextEl = nextRef.current;
+                                    if (typeof swiper.params.navigation === 'object')
+                                    {
+                                        swiper.params.navigation.prevEl = prevRef.current;
+                                        swiper.params.navigation.nextEl = nextRef.current;
+
+                                    }
                                     swiper.navigation.init();
                                     swiper.navigation.update();
                                 }}
-                                // @ts-ignore
-                                onSwiper={setThumbsSwiper}
+                                onSwiper={(swiper) => setThumbsSwiper(swiper)}
                                 spaceBetween={10}
                                 slidesPerView={4}
                                 watchSlidesProgress
                                 className="thumb-sliders"
                             >
-                                {sliders.map((slider) => (
-                                    <SwiperSlide>
+                                {product?.images.map((image) => (
+                                    <SwiperSlide key={image.id}>
                                         <img className="thumb-image w-100"
-                                             src={slider.image}
-                                             alt="Thumbnail"/>
+                                             src={image.image_url}
+                                             alt={product?.name}/>
                                     </SwiperSlide>
                                 ))}
                             </Swiper>
@@ -119,16 +114,24 @@ function ProductDetail() {
                         </div>
                     </div>
                     <div className="col-md-7 product-detail position-relative">
-                        <h4 className="fw-bold-600">Georgia Washington 2</h4>
-                        <div className="price text-orange fw-bold-600">369.00 TL</div>
+                        <h4 className="fw-bold-600">{product?.name}</h4>
+                        <div className="price del-price text-orange fw-bold-600 text-muted"><del>{product?.price} TL</del></div>
+                        <div className="price text-orange fw-bold-600">{product?.final_price} TL</div>
                         <hr className="mt-5"/>
-                        <h6>Erkek Bot</h6>
+                        <h6>Ürünün Kategorileri:  {product?.categories?.map((category, index) => (
+                            <React.Fragment key={category.id}>
+                                <Link
+                                    key={category.id}
+                                    to={`/urun-listesi/?categories=${category.slug}`}
+                                    className="product-detail-category"
+                                >{category.name}</Link>
+                                {index < product.categories.length - 1 && ', '}
+                            </React.Fragment>
+                        ))}</h6>
                         <hr/>
-                        <h6>marka1</h6>
+                        <h6>{product?.brand.name}</h6>
                         <hr/>
-                        <p className="product-short-description font-playfair">
-                            Earum asperiores lab
-                        </p>
+                        <p className="product-short-description font-playfair" dangerouslySetInnerHTML={{ __html: product?.short_description  || ''}}></p>
                         <div className="shopping">
                             <div className="row">
                                 <div className="col-md-1 text-center">
@@ -146,10 +149,15 @@ function ProductDetail() {
 
                                 <div className="col-md-5">
                                     <div className="input-group">
-                                        <select id="footSize" className="form-control text-center">
-                                            <option disabled={true} selected={true}>Beden</option>
-                                            <option value="7">40</option>
-                                            <option value="8">36</option>
+                                        <select id="footSize"
+                                                className="form-control text-center"
+                                                value={selectedSize}
+                                                onChange={(e) => setSelectedSize(e.target.value)}
+                                        >
+                                            <option value="">Beden</option>
+                                            {product?.sizes?.map((size) => (
+                                                <option key={size.id} value={size.id}>{size.size}</option>
+                                            ))}
                                         </select>
                                     </div>
                                 </div>
@@ -161,10 +169,18 @@ function ProductDetail() {
                                 </div>
                             </div>
                         </div>
-                        <div className="discount-rate">
-                            %20
-                            <span className="d-block">İndirim</span>
-                        </div>
+                        {product?.active_price_history?.discount && (
+                            <div className="discount-rate">
+                                {
+                                    product.active_price_history.discount.discount_type === 'fixed'
+                                        ? product.active_price_history.discount.discount_amount + " TL"
+                                        : product.active_price_history.discount.discount_type === 'percentage'
+                                            ? '%' + product.active_price_history.discount.discount_amount
+                                            : ''
+                                }
+                                <span className="d-block">İndirim</span>
+                            </div>
+                        )}
                     </div>
 
                     <div className="col-md-12 mt-4">
@@ -179,8 +195,7 @@ function ProductDetail() {
                                 </h2>
                                 <div id="collapseOne" className="accordion-collapse collapse"
                                      data-bs-parent="#accordionExample">
-                                    <div className="accordion-body">
-                                        Ullamco exercitation
+                                    <div className="accordion-body" dangerouslySetInnerHTML={{ __html: product?.long_description  || ''}}>
                                     </div>
                                 </div>
                             </div>

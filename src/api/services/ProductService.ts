@@ -23,4 +23,8 @@ export const ProductService = {
         const response = await api.get('/products', { params: filter });
         return response.data.data;
     },
+    async getDetail(slug: string): Promise<Product> {
+        const response = await api.get(`/products/${slug}`);
+        return response.data.data;
+    }
 };
