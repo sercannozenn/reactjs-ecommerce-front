@@ -365,6 +365,14 @@ Image Slider Latest Added Product
 }
 
 /*Whatsapp*/
+.whatsappcss{
+    background-color: #25d366; /* WhatsApp yeşili */
+    color: white;
+}
+.whatsappcss:hover{
+    background-color: #06f65a !important; /* WhatsApp yeşili */
+    color: white !important;
+}
 .whatsapp-floating {
     position: fixed;
     bottom: 20px;
@@ -384,7 +392,8 @@ Image Slider Latest Added Product
 }
 
 /* Hover Efekti */
-.whatsapp-floating:hover {
+.whatsapp-floating:hover
+{
     transform: scale(1.1); /* Hafif büyüme efekti */
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
 }

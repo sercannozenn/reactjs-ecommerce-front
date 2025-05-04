@@ -2,7 +2,7 @@ import {useEffect, useRef, useState} from "react";
 import React from "react";
 import {Link, useParams} from "react-router";
 import type { Swiper as SwiperType } from 'swiper';
-
+import Swal from 'sweetalert2';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {Navigation, Thumbs, Zoom} from 'swiper/modules';
 // @ts-ignore
@@ -17,8 +17,12 @@ import "swiper/css/scrollbar";
 import "swiper/css/zoom";
 import {Product} from "../types/Product.ts";
 import {ProductService} from "../api/services/ProductService.ts";
+import {TbBrandWhatsapp} from "react-icons/tb";
+import {useGetSettingsQuery} from "../api/services/SettingsCacheService.ts";
 
 function ProductDetail() {
+    const { data: settings = {} } = useGetSettingsQuery();
+
     const { slug } = useParams();
     const [selectedSize, setSelectedSize] = useState("");
 
@@ -35,7 +39,14 @@ function ProductDetail() {
     }, [slug]);
 
     const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
+    const handleWhatsappClick = () => {
+        const url = window.location.href;
+        const message = `Merhaba, bu ürün hakkında bilgi almak istiyorum: ${url}`;
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappURL = `https://wa.me/9${settings['whatsapp_number'] ?? ''}?text=${encodedMessage}`; // numarayı güncelle
 
+        window.open(whatsappURL, "_blank");
+    };
     return (
         <>
             <div className="container">
@@ -163,9 +174,34 @@ function ProductDetail() {
                                 </div>
 
                                 <hr className="my-3"/>
-                                <div className="col-md-12">
-                                    <a href="#" data-product-id="2"
+                                <div className="col-md-6">
+                                    <a href="#"
+                                       onClick={(e) => {
+                                           e.preventDefault();
+                                           Swal.fire({
+                                               icon: 'info',
+                                               title: 'Bilgi',
+                                               text: 'Lütfen WhatsApp üzerinden iletişime geçin.',
+                                               showCancelButton: true,
+                                               confirmButtonText: 'Tamamdır',
+                                               cancelButtonText: '<span style="display:flex;align-items:center;gap:6px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 24 24"><path d="M16.7 13.3c-.3-.2-1.6-.8-1.8-.9-.2-.1-.4-.2-.6.2s-.7.9-.9 1.1c-.2.2-.3.3-.6.1-.3-.2-1.1-.4-2-1.3-.7-.7-1.3-1.6-1.5-1.9s0-.4.1-.6c.1-.1.2-.3.3-.4.1-.2.1-.3.2-.5s0-.4 0-.5c0-.2-.6-1.5-.8-2.1-.2-.6-.4-.5-.6-.5s-.3 0-.5 0-.4 0-.6.3c-.2.3-.8.8-.8 2s.8 2.4.9 2.6c.1.2 1.7 2.6 4.1 3.7 1.6.7 2.2.8 3 .7.5-.1 1.6-.6 1.8-1.2.2-.5.2-1.1.1-1.2z"/><path d="M12 0C5.4 0 0 5.4 0 12c0 2 .5 3.9 1.5 5.6L0 24l6.5-1.7C8.1 23.5 10 24 12 24c6.6 0 12-5.4 12-12S18.6 0 12 0zm0 21.9c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.9 1 1-3.8-.3-.4C2.6 15.7 2.1 13.9 2.1 12c0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 9.9-10 9.9z"/></svg> WhatsApp</span>',
+                                               reverseButtons: true,
+                                               customClass: {
+                                                   confirmButton: 'btn btn-secondary me-2',
+                                                   cancelButton: 'btn whatsappcss',
+                                               },
+                                           }).then((result) => {
+                                               if (result.dismiss === Swal.DismissReason.cancel) {
+                                                   handleWhatsappClick();
+                                               }
+                                           });
+                                       }}
                                        className="btn bg-orange add-to-card w-100 text-white">Sepete Ekle</a>
+                                </div>
+                                <div className="col-md-6">
+                                    <a href="#"
+                                       onClick={handleWhatsappClick}
+                                       className="btn whatsappcss add-to-card w-100"><TbBrandWhatsapp/> İletişime Geç</a>
                                 </div>
                             </div>
                         </div>
