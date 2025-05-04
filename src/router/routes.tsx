@@ -2,6 +2,8 @@ import { lazy } from 'react';
 import About from "../pages/About.tsx";
 import ProductList from "../pages/ProductList.tsx";
 import ProductDetail from "../pages/ProductDetail.tsx";
+import AnnouncementAll from "../pages/AnnouncementAll.tsx";
+import AnnouncementDetail from "../pages/AnnouncementDetail.tsx";
 
 
 const Index = lazy(() => import('../pages/Index'));
@@ -39,6 +41,20 @@ const routes = [
         path: '/urun-detay',
         name: 'ProductDetail',
         element: <ProductDetail />,
+        layout: 'main',
+        protected: false
+    },
+    {
+        path: '/duyurular',
+        name: 'AnnouncementAll',
+        element: <AnnouncementAll />,
+        layout: 'main',
+        protected: false
+    },
+    {
+        path: '/duyurular/:id',
+        name: 'AnnouncementDetail',
+        element: <AnnouncementDetail />,
         layout: 'main',
         protected: false
     },

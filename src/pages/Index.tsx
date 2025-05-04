@@ -8,6 +8,7 @@ import { Product } from "../types/Product.ts";
 import { ProductService } from "../api/services/ProductService.ts";
 import { AnnouncementService } from '../api/services/AnnouncementService';
 import { Announcement } from '../types/Announcement';
+import {useRouteNavigator} from "../router/RouteHelper.ts";
 
 import {parseInlineStyle} from "../utils/style.ts";
 
@@ -34,6 +35,7 @@ dayjs.locale('tr');
 function Index() {
     const prevRef = useRef(null);
     const nextRef = useRef(null);
+    const navigateToRoute = useRouteNavigator();
 
 
     const [sliders, setSliders] = useState<Slider[]>([]);
@@ -46,7 +48,7 @@ function Index() {
 
     // "Load More" butonuna tıklandığında öğe sayısını artır
     const loadMore = async () => {
-        const data = await AnnouncementService.getHomepageItems({ offset: announcementsOffset, limit: 2 });
+        const data = await AnnouncementService.getHomepageItems({ offset: announcementsOffset, limit: 2, is_active: 1 });
         setAnnouncements(prev => [...prev, ...data]);
         setAnnouncementsOffset(prev => prev + data.length);
         if (data.length < 2) {
@@ -54,7 +56,7 @@ function Index() {
         }
     };
     const loadMoreAll = () => {
-
+        navigateToRoute('AnnouncementAll');
     }
 
     const getIconData = (type: string) => {
@@ -90,7 +92,7 @@ function Index() {
             }
         };
         const fetchAnnouncements = async () => {
-            const data = await AnnouncementService.getHomepageItems({ limit: 2, offset: announcements.length });
+            const data = await AnnouncementService.getHomepageItems({ limit: 2, offset: announcements.length, is_active: 1 });
 
             setAnnouncements(data);
             setAnnouncementsOffset(data.length);
