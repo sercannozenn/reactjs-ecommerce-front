@@ -7,12 +7,14 @@ import { TfiAnnouncement } from 'react-icons/tfi';
 import { FcCalendar } from 'react-icons/fc';
 import dayjs from 'dayjs';
 import 'dayjs/locale/tr';
-import {Link} from "react-router";
+import {useRouteNavigator} from "../router/RouteHelper.ts";
 
 
 dayjs.locale('tr');
 
 function AnnouncementAll() {
+    const navigateToRoute = useRouteNavigator();
+
     const [announcements, setAnnouncements] = useState<Announcement[]>([]);
     const [offset, setOffset] = useState(0);
     const [hasMore, setHasMore] = useState(true);
@@ -45,33 +47,37 @@ function AnnouncementAll() {
     return (
         <div className="container my-10">
             <h2 className="text-2xl font-bold mb-6">Tüm Duyuru ve Etkinlikler</h2>
+            <div className="col-md-12">
+
             <VerticalTimeline className="w-100">
                 {announcements.map((item) => {
                     const isPast = dayjs(item.date).isBefore(dayjs(), 'day');
                     const { icon, iconStyle } = getIconData(item.type);
 
                     return (
-                        <Link to={`/duyurular/${item.id}`} className="no-underline text-white">
                         <VerticalTimelineElement
+                            onTimelineElementClick={() => navigateToRoute(`AnnouncementDetail`, { id: item.id })}
+                            iconOnClick={() => navigateToRoute(`AnnouncementDetail`, { id: item.id })}
+                            style={{ cursor: 'pointer' }}
                             className="vertical-timeline-element--work"
                             textClassName={isPast ? 'bg-gray-500' : 'bg-orange-bold'}
                             contentStyle={{
                                 color: '#fff',
                                 background: isPast ? '#6c757d' : '#f97316'
                             }}
-                            contentArrowStyle={{ borderRight: '7px solid #f97316' }}
+                            contentArrowStyle={{borderRight: '7px solid #f97316'}}
                             key={item.id}
                             date={dayjs(item.date).format('D MMMM YYYY')}
                             dateClassName="text-dark"
                             icon={icon}
-                            iconStyle={isPast ? { background: '#6c757d', color: '#fff' } : iconStyle}
+                            iconStyle={isPast ? {background: '#6c757d', color: '#fff'} : iconStyle}
                         >
-                            <h3>{item.title}</h3>
-                            <div dangerouslySetInnerHTML={{ __html: item.description }} />
+                                <h3>{item.title}</h3>
+                                <div dangerouslySetInnerHTML={{__html: item.description}}/>
                         </VerticalTimelineElement>
-                        </Link>
                     );
-                })}            </VerticalTimeline>
+                })}
+            </VerticalTimeline>
             {hasMore && (
                 <div className="text-center mt-6">
                     <button className="btn btn-secondary" onClick={loadAnnouncements}>
@@ -79,6 +85,8 @@ function AnnouncementAll() {
                     </button>
                 </div>
             )}
+
+            </div>
         </div>
     );
 }

@@ -261,12 +261,16 @@ function Index() {
                         <div className="row">
                             <div className="col-md-12 px-0">
                                 <h3>Etkinlik ve Duyurular</h3>
+                                {announcements.length > 0 ? (
                                 <VerticalTimeline className="w-100">
                                     {announcements.map((item) => {
                                         const { icon, iconStyle } = getIconData(item.type);
 
                                         return (
                                             <VerticalTimelineElement
+                                                onTimelineElementClick={() => navigateToRoute(`AnnouncementDetail`, { id: item.id })}
+                                                iconOnClick={() => navigateToRoute(`AnnouncementDetail`, { id: item.id })}
+                                                style={{ cursor: 'pointer' }}
                                                 className="vertical-timeline-element--work"
                                                 textClassName="bg-orange-bold"
                                                 contentStyle={{ color: '#fff'}}
@@ -284,18 +288,22 @@ function Index() {
                                     })}
 
                                 </VerticalTimeline>
-
-                                {announcementsHasMore && (
-                                    <div style={{textAlign: "center", marginTop: "20px"}}>
-                                        <button className="me-4" onClick={loadMore} style={{padding: "10px 20px", fontSize: "16px"}}>
+                                    ):(
+                                    <div className="alert alert-warning">
+                                        Şu anda güncel herhangi bir duyuru veya etkinlik bulunmamaktadır.
+                                    </div>
+                                )}
+                                <div style={{textAlign: "center", marginTop: "20px"}}>
+                                    {announcementsHasMore && (
+                                        <button className="me-4" onClick={loadMore}
+                                                style={{padding: "10px 20px", fontSize: "16px"}}>
                                             Daha Fazla Yükle
                                         </button>
-                                        <button onClick={loadMoreAll} style={{padding: "10px 20px", fontSize: "16px"}}>
-                                            Tümünü Göster
-                                        </button>
-                                    </div>
-
-                                )}
+                                    )}
+                                    <button onClick={loadMoreAll} style={{padding: "10px 20px", fontSize: "16px"}}>
+                                        Tümünü Göster {announcements.length < 1 ? '(Eskiler Dahil)' : ''}
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>

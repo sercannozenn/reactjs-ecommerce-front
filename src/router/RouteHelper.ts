@@ -46,7 +46,6 @@ export const useRouteNavigator = () => {
 
         // Yönlendirme işlemi
         window.location.href = fullPath; // veya başka bir yönlendirme yöntemi
-        // navigate(path);
     };
 
     return navigateToRoute;
