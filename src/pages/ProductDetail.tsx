@@ -126,7 +126,10 @@ function ProductDetail() {
                     </div>
                     <div className="col-md-7 product-detail position-relative">
                         <h4 className="fw-bold-600">{product?.name}</h4>
-                        <div className="price del-price text-orange fw-bold-600 text-muted"><del>{product?.price} TL</del></div>
+                        <div hidden={product?.price == product?.final_price}
+                             className="price del-price text-orange fw-bold-600 text-muted">
+                            <del>{product?.price} TL</del>
+                        </div>
                         <div className="price text-orange fw-bold-600">{product?.final_price} TL</div>
                         <hr className="mt-5"/>
                         <h6>Ürünün Kategorileri:  {product?.categories?.map((category, index) => (

@@ -295,10 +295,10 @@ function ProductList() {
                                                     <span className="product-tag text-orange fw-bold-600">Yeni</span>
                                                     <span className="favorite"><i className="bi bi-heart"></i></span>
                                                     <span className="un-favorite"><i className="bi bi-heart-fill"></i></span>
-                                                    <a href={`/urun-listesi?brands=${product.brand?.slug}`} className="product-brand text-orange fw-bold-600">
-                                                        {product.brand?.name}
-                                                    </a>
                                                 </div>
+                                                <a href={`/urun-listesi?brands=${product.brand?.slug}`} className="product-brand text-orange fw-bold-600">
+                                                    {product.brand?.name || 'Markasız'}
+                                                </a>
                                             </div>
                                             <div className="product-info text-center pt-3">
                                                 <a href={`/urun/${product.slug}`}>

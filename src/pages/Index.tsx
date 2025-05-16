@@ -203,7 +203,7 @@ function Index() {
                                         <SwiperSlide key={product.id}>
                                             <div className="wrapper-product position-relative">
                                                 <div className="product-image position-relative">
-                                                    <a href="#">
+                                                    <a href={`/urun/${product.slug}`}>
                                                         <img
                                                             src={product.featured_image.image_url}
                                                             className="img-fluid"
@@ -212,19 +212,21 @@ function Index() {
                                                     </a>
                                                     <div className="product-overlay">
                                                         <span className="product-tag text-orange-bold fw-bold-600">Yeni</span>
-                                                        <a href="#" className="product-brand text-orange-bold fw-bold-600">
-                                                            {product.brand?.name || 'Markasız'}
-                                                        </a>
                                                     </div>
+                                                    <a href={`/urun-listesi?brands=${product.brand?.slug}`} className="product-brand text-orange-bold fw-bold-600">
+                                                        {product.brand?.name || 'Markasız'}
+                                                    </a>
                                                 </div>
                                                 <div className="product-info text-center pt-3">
+                                                    <a href={`/urun/${product.slug}`}>
                                                     <h4 className="product-title">{product.name}</h4>
                                                     <div
                                                         className="text-muted product-description"
                                                         dangerouslySetInnerHTML={{ __html: product.short_description }}
                                                     />
-                                                    <a href="#" className="product-price text-orange-bold">
-                                                        {product.final_price || product.latest_price?.price_discount || product.latest_price?.price} TL
+                                                    </a>
+                                                    <a href={`/urun/${product.slug}`} className="product-price text-orange-bold">
+                                                        {product.final_price} TL
                                                     </a>
                                                 </div>
                                             </div>
